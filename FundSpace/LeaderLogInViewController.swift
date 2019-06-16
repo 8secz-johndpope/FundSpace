@@ -13,8 +13,8 @@ import SVProgressHUD
 import GoogleSignIn
 import Firebase
 
-class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UITextFieldDelegate {
-
+class LeaderLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate, UITextFieldDelegate {
+    
     @IBOutlet weak var emailView: UIView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordView: UIView!
@@ -30,7 +30,7 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.initUI()
     }
@@ -43,21 +43,8 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
-        emailTextField.text = "test@developer.com"
-        passwordTextField.text = "Asd123!@#"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
     @IBAction func loginBtn_Click(_ sender: Any) {
         SVProgressHUD.show()
         
@@ -68,7 +55,7 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
             SVProgressHUD.dismiss()
             if error == nil {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabViewController
                 self.present(newViewController, animated: true, completion: nil)
             } else {
                 let errorMessage = error?.localizedDescription
@@ -110,9 +97,7 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
                     Helper.sharedInstance.showNotice(_self: self, messageStr: message)
                     return
                 } else {
-                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
-                    self.present(newViewController, animated: true, completion: nil)
+                    Helper.sharedInstance.showNotice(_self: self, messageStr: "Success with Google")
                     return
                 }
             }
@@ -147,7 +132,7 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
         let userInfo: [String: Any] = [
             "name": name,
             "email": email,
-            "type": "developer"
+            "type": "leader"
         ]
         
         FirebaseService.sharedInstance.logInWithSocial(credential: credential, userInfo: userInfo) { (user, error) in
@@ -157,7 +142,7 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
                 return
             } else {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabViewController
                 self.present(newViewController, animated: true, completion: nil)
                 return
             }
@@ -182,57 +167,5 @@ class DeveloperLogInViewController: UIViewController, GIDSignInUIDelegate, GIDSi
         default:
             break
         }
-    }
-}
-
-
-
-// MARK: - UIView Extension -  Bottom border view
-extension UIView {
-    
-    /// Adds bottom border to the view with given side margins
-    ///
-    /// - Parameters:
-    ///   - color: the border color
-    ///   - margins: the left and right margin
-    ///   - borderLineSize: the size of the border
-    func addBottomBorder(color: UIColor = UIColor.red, margins: CGFloat = 0, borderLineSize: CGFloat = 1) {
-        let border = UIView()
-        border.backgroundColor = color
-        border.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(border)
-        border.addConstraint(NSLayoutConstraint(item: border,
-                                                attribute: .height,
-                                                relatedBy: .equal,
-                                                toItem: nil,
-                                                attribute: .height,
-                                                multiplier: 1, constant: borderLineSize))
-        self.addConstraint(NSLayoutConstraint(item: border,
-                                              attribute: .bottom,
-                                              relatedBy: .equal,
-                                              toItem: self,
-                                              attribute: .bottom,
-                                              multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: border,
-                                              attribute: .leading,
-                                              relatedBy: .equal,
-                                              toItem: self,
-                                              attribute: .leading,
-                                              multiplier: 1, constant: margins))
-        self.addConstraint(NSLayoutConstraint(item: border,
-                                              attribute: .trailing,
-                                              relatedBy: .equal,
-                                              toItem: self,
-                                              attribute: .trailing,
-                                              multiplier: 1, constant: margins))
-    }
-    
-    func setBorder(radius:CGFloat, color:UIColor = UIColor.clear) -> UIView{
-        let roundView:UIView = self
-        roundView.layer.cornerRadius = CGFloat(radius)
-        roundView.layer.borderWidth = 1
-        roundView.layer.borderColor = color.cgColor
-        roundView.clipsToBounds = true
-        return roundView
     }
 }

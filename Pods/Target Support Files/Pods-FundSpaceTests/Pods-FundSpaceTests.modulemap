@@ -1,0 +1,6 @@
+framework module Pods_FundSpaceTests {
+  umbrella header "Pods-FundSpaceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

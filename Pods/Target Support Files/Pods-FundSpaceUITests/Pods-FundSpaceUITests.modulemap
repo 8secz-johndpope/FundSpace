@@ -1,0 +1,6 @@
+framework module Pods_FundSpaceUITests {
+  umbrella header "Pods-FundSpaceUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

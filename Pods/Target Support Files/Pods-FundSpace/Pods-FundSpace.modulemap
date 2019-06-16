@@ -1,0 +1,6 @@
+framework module Pods_FundSpace {
+  umbrella header "Pods-FundSpace-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7DBE17079A615185DE7D7EF0 /* Pods_FundSpaceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9EF9876B976800313E4E2BB /* Pods_FundSpaceTests.framework */; };
+		80C68D4F22C34D540007E091 /* AddProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C68D4E22C34D540007E091 /* AddProjectViewController.swift */; };
+		80C68D5122C34F580007E091 /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C68D5022C34F580007E091 /* ProjectViewController.swift */; };
+		80C68D5322C34F6C0007E091 /* CostingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C68D5222C34F6C0007E091 /* CostingsViewController.swift */; };
+		80C68D5522C34F890007E091 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C68D5422C34F890007E091 /* OtherViewController.swift */; };
 		8400B021229B201800115757 /* CompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400B020229B201800115757 /* CompanyViewController.swift */; };
 		8400B023229BB96000115757 /* BioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8400B022229BB96000115757 /* BioViewController.swift */; };
 		8488235F226F085A003B5E53 /* LeaderSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8488235E226F085A003B5E53 /* LeaderSignUpViewController.swift */; };
@@ -67,6 +71,10 @@
 		08B9E560752B73561F225EF8 /* Pods-FundSpaceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpaceTests.release.xcconfig"; path = "Target Support Files/Pods-FundSpaceTests/Pods-FundSpaceTests.release.xcconfig"; sourceTree = "<group>"; };
 		4F7D9004309FB5533DEA9D2C /* Pods_FundSpaceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FundSpaceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9F6ACD5834F260B35C82D1 /* Pods-FundSpace.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.debug.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.debug.xcconfig"; sourceTree = "<group>"; };
+		80C68D4E22C34D540007E091 /* AddProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectViewController.swift; sourceTree = "<group>"; };
+		80C68D5022C34F580007E091 /* ProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		80C68D5222C34F6C0007E091 /* CostingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostingsViewController.swift; sourceTree = "<group>"; };
+		80C68D5422C34F890007E091 /* OtherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		81773A3EC040D3FFD9B15068 /* Pods-FundSpaceUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpaceUITests.release.xcconfig"; path = "Target Support Files/Pods-FundSpaceUITests/Pods-FundSpaceUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8400B020229B201800115757 /* CompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewController.swift; sourceTree = "<group>"; };
 		8400B022229BB96000115757 /* BioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +151,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8039F72422C347FC00DC44AE /* Developer */ = {
+			isa = PBXGroup;
+			children = (
+				84C286F6225AF92A00454606 /* DeveloperLogInViewController.swift */,
+				84992AD4225BAC3E00D385DB /* DeveloperSignUpViewController.swift */,
+				84E9D36E2276F7840075DCC4 /* DeveloperTabViewController.swift */,
+				848EAF6D2278CE240006F87F /* DeveloperProfileViewController.swift */,
+				84AB0BEA22835E61008035B6 /* DeveloperEditProfileViewController.swift */,
+				84FC73D0229AF78C00E27B57 /* BasicViewViewController.swift */,
+				8400B020229B201800115757 /* CompanyViewController.swift */,
+				8400B022229BB96000115757 /* BioViewController.swift */,
+				80C68D4E22C34D540007E091 /* AddProjectViewController.swift */,
+				80C68D5022C34F580007E091 /* ProjectViewController.swift */,
+				80C68D5222C34F6C0007E091 /* CostingsViewController.swift */,
+				80C68D5422C34F890007E091 /* OtherViewController.swift */,
+			);
+			path = Developer;
+			sourceTree = "<group>";
+		};
+		80C68D4C22C34A1B0007E091 /* Lender */ = {
+			isa = PBXGroup;
+			children = (
+				849A5E8D226F0060007A9E5B /* LeaderLogInViewController.swift */,
+				8488235E226F085A003B5E53 /* LeaderSignUpViewController.swift */,
+				848EAF6B2278A0800006F87F /* LeaderTabViewController.swift */,
+			);
+			path = Lender;
+			sourceTree = "<group>";
+		};
+		80C68D4D22C34A6A0007E091 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				84A34C8E227386B50038F570 /* ForgotPasswordViewController.swift */,
+				84A34C902273E6B40038F570 /* TermsViewController.swift */,
+				84A34C922273E6E40038F570 /* NewsViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		8497973922802A4600AF751F /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +232,9 @@
 		84C286B0225A924600454606 /* FundSpace */ = {
 			isa = PBXGroup;
 			children = (
+				80C68D4D22C34A6A0007E091 /* Common */,
+				80C68D4C22C34A1B0007E091 /* Lender */,
+				8039F72422C347FC00DC44AE /* Developer */,
 				8497973922802A4600AF751F /* Custom Components */,
 				84992AD6225BBCA300D385DB /* Service */,
 				84C286E1225AE84700454606 /* Fonts */,
@@ -194,20 +244,6 @@
 				84C286BA225A924A00454606 /* LaunchScreen.storyboard */,
 				84C286DF225A92A800454606 /* GoogleService-Info.plist */,
 				84C286BD225A924A00454606 /* Info.plist */,
-				84C286F6225AF92A00454606 /* DeveloperLogInViewController.swift */,
-				84992AD4225BAC3E00D385DB /* DeveloperSignUpViewController.swift */,
-				849A5E8D226F0060007A9E5B /* LeaderLogInViewController.swift */,
-				8488235E226F085A003B5E53 /* LeaderSignUpViewController.swift */,
-				84A34C8E227386B50038F570 /* ForgotPasswordViewController.swift */,
-				84A34C902273E6B40038F570 /* TermsViewController.swift */,
-				84A34C922273E6E40038F570 /* NewsViewController.swift */,
-				84E9D36E2276F7840075DCC4 /* DeveloperTabViewController.swift */,
-				848EAF6B2278A0800006F87F /* LeaderTabViewController.swift */,
-				848EAF6D2278CE240006F87F /* DeveloperProfileViewController.swift */,
-				84AB0BEA22835E61008035B6 /* DeveloperEditProfileViewController.swift */,
-				84FC73D0229AF78C00E27B57 /* BasicViewViewController.swift */,
-				8400B020229B201800115757 /* CompanyViewController.swift */,
-				8400B022229BB96000115757 /* BioViewController.swift */,
 			);
 			path = FundSpace;
 			sourceTree = "<group>";
@@ -574,7 +610,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80C68D5122C34F580007E091 /* ProjectViewController.swift in Sources */,
+				80C68D5522C34F890007E091 /* OtherViewController.swift in Sources */,
 				84FC73D1229AF78C00E27B57 /* BasicViewViewController.swift in Sources */,
+				80C68D5322C34F6C0007E091 /* CostingsViewController.swift in Sources */,
+				80C68D4F22C34D540007E091 /* AddProjectViewController.swift in Sources */,
 				84992AD8225BBCC400D385DB /* Helper.swift in Sources */,
 				8488235F226F085A003B5E53 /* LeaderSignUpViewController.swift in Sources */,
 				84992AD5225BAC3E00D385DB /* DeveloperSignUpViewController.swift in Sources */,

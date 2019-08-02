@@ -2,14 +2,11 @@
 //  AppDelegate.swift
 //  FundSpace
 //
-//  Created by admin on 4/7/19.
+//  Created by PUMA on 02/08/2019.
 //  Copyright © 2019 Zhang Hui. All rights reserved.
 //
 
 import UIKit
-import Firebase
-import GoogleSignIn
-import GooglePlaces
 import IQKeyboardManagerSwift
 
 @UIApplicationMain
@@ -20,12 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
-        
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GMSPlacesClient.provideAPIKey("AIzaSyDiKAPS7127lOxPdVlJawUSc6cKpUt-6-0")
         
         IQKeyboardManager.shared.enable = true
+        
         return true
     }
 
@@ -50,11 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url,
-                                                 sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                                 annotation: [:])
-    }
+
+
 }
 

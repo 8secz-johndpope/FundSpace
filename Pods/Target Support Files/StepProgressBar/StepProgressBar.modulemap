@@ -1,6 +1,0 @@
-framework module StepProgressBar {
-  umbrella header "StepProgressBar-umbrella.h"
-
-  export *
-  module * { export * }
-}

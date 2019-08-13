@@ -47,10 +47,10 @@ class LogInVC: UIViewController {
         loginBtn.layer.cornerRadius = 6
         
         // Email textfile style
-        emailTextField.font = UIFont(name: "Open Sans Regular", size: 17)
+        emailTextField.font = UIFont(name: "OpenSans", size: 15)
         
         // Password textfield style
-        passwordTextField.font = UIFont(name: "Open Sans Regular", size: 17)
+        passwordTextField.font = UIFont(name: "OpenSans", size: 15)
         passwordTextField.isSecureTextEntry = !_showPassword
         
         showPasswordBtn = UIButton(type: .custom)
@@ -70,11 +70,15 @@ class LogInVC: UIViewController {
     
     // MARK: Button Actions
     @IBAction func signupBtn_Click(_ sender: Any) {
-        let signupVC = SignUpVC()
-        self.navigationController?.pushViewController(signupVC, animated: true)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "singupVC") as! SignUpVC
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @IBAction func forgotPasswordBtn_Click(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "forgotVC") as! ForgotVC
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @IBAction func loginBtn_Click(_ sender: Any) {

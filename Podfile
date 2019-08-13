@@ -8,6 +8,9 @@ target 'FundSpace' do
   # Pods for FundSpace
   pod 'IQKeyboardManagerSwift'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'BEMCheckBox'
+  pod 'Atributika'
+  pod 'SVProgressHUD'
 
   target 'FundSpaceTests' do
     inherit! :search_paths

@@ -10,6 +10,13 @@
 		014483660E0E746483C8F8CC /* Pods_FundSpace.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 796E4C51AE9A59C65E7473FA /* Pods_FundSpace.framework */; };
 		1FBB6D8A3302FBBF4A40E3DD /* Pods_FundSpaceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4EECF83E788BFBF732C3C99 /* Pods_FundSpaceTests.framework */; };
 		4D17691449E61AEB711FE184 /* Pods_FundSpaceUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 620B5C3983A86B1AC62E3CF7 /* Pods_FundSpaceUITests.framework */; };
+		803EBC7D2302125E00CEC189 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC7C2302125E00CEC189 /* Extensions.swift */; };
+		803EBC7F23021DA600CEC189 /* TermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC7E23021DA600CEC189 /* TermsVC.swift */; };
+		803EBC832302210B00CEC189 /* privacy.html in Resources */ = {isa = PBXBuildFile; fileRef = 803EBC812302210A00CEC189 /* privacy.html */; };
+		803EBC842302210B00CEC189 /* terms.html in Resources */ = {isa = PBXBuildFile; fileRef = 803EBC822302210B00CEC189 /* terms.html */; };
+		803EBC862302274400CEC189 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803EBC852302274300CEC189 /* WebKit.framework */; };
+		803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC8723022DC400CEC189 /* PrivacyVC.swift */; };
+		803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC89230230C000CEC189 /* ForgotVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -48,6 +55,13 @@
 		5B99F60EDBDE91947AB7C81B /* Pods-FundSpaceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpaceTests.debug.xcconfig"; path = "Target Support Files/Pods-FundSpaceTests/Pods-FundSpaceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		620B5C3983A86B1AC62E3CF7 /* Pods_FundSpaceUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FundSpaceUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		796E4C51AE9A59C65E7473FA /* Pods_FundSpace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FundSpace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		803EBC7C2302125E00CEC189 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		803EBC7E23021DA600CEC189 /* TermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsVC.swift; sourceTree = "<group>"; };
+		803EBC812302210A00CEC189 /* privacy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = privacy.html; sourceTree = "<group>"; };
+		803EBC822302210B00CEC189 /* terms.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms.html; sourceTree = "<group>"; };
+		803EBC852302274300CEC189 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		803EBC8723022DC400CEC189 /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
+		803EBC89230230C000CEC189 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -78,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				803EBC862302274400CEC189 /* WebKit.framework in Frameworks */,
 				014483660E0E746483C8F8CC /* Pods_FundSpace.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -117,6 +132,7 @@
 		6C5642B78E8E96A18093D711 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				803EBC852302274300CEC189 /* WebKit.framework */,
 				796E4C51AE9A59C65E7473FA /* Pods_FundSpace.framework */,
 				D4EECF83E788BFBF732C3C99 /* Pods_FundSpaceTests.framework */,
 				620B5C3983A86B1AC62E3CF7 /* Pods_FundSpaceUITests.framework */,
@@ -124,11 +140,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		803EBC8023021EEC00CEC189 /* Terms and Policy */ = {
+			isa = PBXGroup;
+			children = (
+				803EBC812302210A00CEC189 /* privacy.html */,
+				803EBC822302210B00CEC189 /* terms.html */,
+			);
+			path = "Terms and Policy";
+			sourceTree = "<group>";
+		};
 		BD0D4CA922F44212007DCCE5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				BDBF8AC422F41FFF00F92DDA /* LogInVC.swift */,
 				BD0D4CB722F48077007DCCE5 /* SignUpVC.swift */,
+				803EBC7E23021DA600CEC189 /* TermsVC.swift */,
+				803EBC8723022DC400CEC189 /* PrivacyVC.swift */,
+				803EBC89230230C000CEC189 /* ForgotVC.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -136,6 +164,7 @@
 		BD0D4CAA22F46EF8007DCCE5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				803EBC8023021EEC00CEC189 /* Terms and Policy */,
 				BD0D4CAB22F46F03007DCCE5 /* Fonts */,
 			);
 			path = "Support Files";
@@ -156,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				BD0D4CB522F473C7007DCCE5 /* Utils.swift */,
+				803EBC7C2302125E00CEC189 /* Extensions.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -336,6 +366,8 @@
 				BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */,
 				BD0D4CB322F46F9E007DCCE5 /* Open Sans Regular.ttf in Resources */,
 				BDBF8ACD22F4200000F92DDA /* LaunchScreen.storyboard in Resources */,
+				803EBC842302210B00CEC189 /* terms.html in Resources */,
+				803EBC832302210B00CEC189 /* privacy.html in Resources */,
 				BDBF8ACA22F4200000F92DDA /* Assets.xcassets in Resources */,
 				BDBF8AC822F41FFF00F92DDA /* Main.storyboard in Resources */,
 			);
@@ -448,7 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				803EBC7D2302125E00CEC189 /* Extensions.swift in Sources */,
+				803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */,
 				BD0D4CB822F48077007DCCE5 /* SignUpVC.swift in Sources */,
+				803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */,
+				803EBC7F23021DA600CEC189 /* TermsVC.swift in Sources */,
 				BDBF8AC522F41FFF00F92DDA /* LogInVC.swift in Sources */,
 				BDBF8AC322F41FFF00F92DDA /* AppDelegate.swift in Sources */,
 				BD0D4CB622F473C7007DCCE5 /* Utils.swift in Sources */,

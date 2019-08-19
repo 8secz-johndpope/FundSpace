@@ -28,7 +28,9 @@ class TermsVC: UIViewController {
     }
     
     func loadLocalHTML() {
-        let url = Bundle.main.url(forResource: "terms", withExtension: "html")!
+        let isDeveloper: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+        
+        let url = isDeveloper ? Bundle.main.url(forResource: "terms_developer", withExtension: "html")! : Bundle.main.url(forResource: "terms_lender", withExtension: "html")!
         wkWebView.loadFileURL(url, allowingReadAccessTo: url)
         let request = URLRequest(url: url)
         wkWebView.load(request)

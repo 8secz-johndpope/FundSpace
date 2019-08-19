@@ -11,6 +11,12 @@ target 'FundSpace' do
   pod 'BEMCheckBox'
   pod 'Atributika'
   pod 'SVProgressHUD'
+  pod 'SCLAlertView'
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Storage'
 
   target 'FundSpaceTests' do
     inherit! :search_paths

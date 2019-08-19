@@ -53,6 +53,7 @@ class LogInVC: UIViewController {
         passwordTextField.font = UIFont(name: "OpenSans", size: 15)
         passwordTextField.isSecureTextEntry = !_showPassword
         
+        // Add show password button to password textfield
         showPasswordBtn = UIButton(type: .custom)
         showPasswordBtn.setImage(UIImage(named: "show_password.png"), for: .normal)
         showPasswordBtn.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: -5, right: 0)
@@ -60,6 +61,9 @@ class LogInVC: UIViewController {
         showPasswordBtn.addTarget(self, action: #selector(self.togglePassword), for: .touchUpInside)
         passwordTextField.rightView = showPasswordBtn
         passwordTextField.rightViewMode = .always
+        
+        // Set user type to UserDefaults
+        UserDefaults.standard.set(true, forKey: "isDeveloper")
     }
     
     // Initialize the events
@@ -102,6 +106,9 @@ class LogInVC: UIViewController {
         passwordTextField.text = ""
         passwordTextField.errorMessage = ""
         _isDeveloper = !_isDeveloper
+        
+        // set User Type to UserDefaults.
+        UserDefaults.standard.set(_isDeveloper, forKey: "isDeveloper")
     }
     
     @IBAction func togglePassword(_ sender: Any) {

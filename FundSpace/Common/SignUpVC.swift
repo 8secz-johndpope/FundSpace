@@ -10,6 +10,7 @@ import UIKit
 import SkyFloatingLabelTextField
 import BEMCheckBox
 import Atributika
+import SVProgressHUD
 
 class SignUpVC: UIViewController {
     @IBOutlet weak var nameTextField: SkyFloatingLabelTextField!
@@ -110,7 +111,57 @@ class SignUpVC: UIViewController {
     }
 
     @IBAction func signUpBtn_Click(_ sender: Any) {
+        let name: String = self.nameTextField.text ?? ""
+        let email: String = self.emailTextField.text ?? ""
+        let password: String = self.passwordTextField.text ?? ""
         
+        if (name == "" || email == "" || password == "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "You need to fill all fields.")
+            return
+        }
+        
+        if (self.emailTextField.errorMessage != "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the valid email address")
+            return
+        }
+        
+        if (self.passwordTextField.errorMessage != "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the strong password.")
+            return
+        }
+        
+        let _acceptTerms: Bool = self.termsCheckBox.on
+        let _acceptNews: Bool = self.newsCheckBox.on 
+        
+        if (!_acceptTerms) {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please accept the terms of use and privacy policy to create your account.")
+            return
+        }
+        
+        let type: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+        
+        var userInfo: [String: Any] = [:]
+        userInfo["name"] = name
+        userInfo["email"] = email
+        userInfo["password"] = password
+        userInfo["type"] = type ? "Developer" : "Leader"
+        userInfo["acceptNews"] = _acceptNews
+        
+        SVProgressHUD.show()
+        
+        FirebaseService.sharedInstance.signUpUser(userInfo: userInfo) { (user, error) in
+            SVProgressHUD.dismiss()
+            if error == nil {
+                Utils.sharedInstance.showSuccess(title: "Success", message: "Your account was created successfully.")
+//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+//                self.present(newViewController, animated: true, completion: nil)
+            } else {
+                let errorMessage: String = error?.localizedDescription ?? ""
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+//                Helper.sharedInstance.showNotice(_self: self, messageStr: errorMessage!)
+            }
+        }
     }
     
     @IBAction func togglePassword(_ sender: Any) {

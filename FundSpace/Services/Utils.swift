@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class Utils: NSObject {
     // Define password strength.
@@ -33,5 +34,20 @@ class Utils: NSObject {
         } else {
             return PASSWORD.LOW
         }
+    }
+    
+    // Show the success message alert
+    func showSuccess(title: String, message: String) {
+        SCLAlertView().showSuccess(title, subTitle: message)
+    }
+    
+    // Show the notice message alert
+    func showNotice(title: String, message: String) {
+        SCLAlertView().showNotice(title, subTitle: message)
+    }
+    
+    // Show the error message alert
+    func showError(title: String, message: String) {
+        SCLAlertView().showError(title, subTitle: message)
     }
 }

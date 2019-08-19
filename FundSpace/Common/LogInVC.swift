@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import SVProgressHUD
 
 class LogInVC: UIViewController {
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
@@ -86,6 +87,36 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func loginBtn_Click(_ sender: Any) {
+        let email: String = self.emailTextField.text ?? ""
+        let password: String = self.passwordTextField.text ?? ""
+        
+        if (email == "" || password == "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "You need to fill all fields.")
+            return
+        }
+        
+        if (self.emailTextField.errorMessage != "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the valid email address")
+            return
+        }
+        
+        if (self.passwordTextField.errorMessage != "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the strong password.")
+            return
+        }
+        
+        SVProgressHUD.show()
+        FirebaseService.sharedInstance.logInUser(email: email, password: password) { (user, error) in
+            SVProgressHUD.dismiss()
+            if error == nil {
+//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+//                self.present(newViewController, animated: true, completion: nil)
+            } else {
+                let errorMessage: String = error?.localizedDescription ?? ""
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+            }
+        }
     }
     
     @IBAction func googleBtn_Click(_ sender: Any) {

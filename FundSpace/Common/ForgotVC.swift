@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import SVProgressHUD
 
 class ForgotVC: UIViewController {
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
@@ -34,6 +35,29 @@ class ForgotVC: UIViewController {
     }
     
     @IBAction func resetBtn_Click(_ sender: Any) {
+        let email: String = self.emailTextField.text ?? ""
+        
+        if (email == "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "You need to fill the email field.")
+            return
+        }
+        
+        if (self.emailTextField.errorMessage != "") {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the valid email address")
+            return
+        }
+        
+        SVProgressHUD.show()
+        FirebaseService.sharedInstance.resetPasswordWithEmail(email: email) { (error) in
+            SVProgressHUD.dismiss()
+            
+            if (error == nil) {
+                Utils.sharedInstance.showSuccess(title: "Success", message: "We sent the request to your email to reset the password. Please check it out and reset your password.")
+            } else {
+                let errorMessage: String = error?.localizedDescription ?? ""
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+            }
+        }
     }
     
     // MARK: Events

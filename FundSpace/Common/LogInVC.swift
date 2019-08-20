@@ -137,8 +137,12 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     }
     
     @IBAction func facebookBtn_Click(_ sender: Any) {
-        let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: readPermissions, viewController: self, completion: didReceiveFacebookLoginResult)
+        if (AccessToken.current == nil) {
+            let loginManager = LoginManager()
+            loginManager.logIn(readPermissions: readPermissions, viewController: self, completion: didReceiveFacebookLoginResult)
+        } else {
+            didLoginWithFacebook()
+        }
     }
     
     @IBAction func userTypeBtn_Click(_ sender: Any) {
@@ -243,9 +247,8 @@ class LogInVC: UIViewController, GIDSignInDelegate {
         switch loginResult {
         case .failed(let error):
             didFailedWithFacebook(error: error)
-        case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+        case .success:
             didLoginWithFacebook()
-        case .cancelled: break
         default: break
         }
     }
@@ -258,21 +261,44 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     fileprivate func didLoginWithFacebook() {
         // Successful log in with Facebook
         if let accessToken = AccessToken.current {
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken as! String)
-            
-            var userInfo: [String: Any] = [:]
-            
-            FirebaseService.sharedInstance.logInWithSocial(credential: credential, userInfo: userInfo) { (user, error) in
-                if let error = error {
-                    let message = error.localizedDescription
-                    Utils.sharedInstance.showError(title: "Error", message: message)
-                    return
-                } else {
-//                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
-//                    self.present(newViewController, animated: true, completion: nil)
-                    return
+            let r = GraphRequest(graphPath: "me", parameters: ["fields": "email, name"], accessToken: accessToken, httpMethod: .GET, apiVersion: 2.0)
+            r.start { (response, result) in
+                switch result {
+                case .success(let response):
+                    self.processFacebookLogIn(data: response.dictionaryValue!)
+                case .failed(let error):
+                    self.didFailedWithFacebook(error: error)
                 }
+            }
+        }
+    }
+    
+    func processFacebookLogIn(data: [String: Any]) {
+        let email: String = data["email"] as! String
+        let name: String = data["name"] as! String
+        
+        let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.authenticationToken)
+        
+        let type: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+        
+        var userInfo: [String: Any] = [:]
+        userInfo["name"] = name
+        userInfo["email"] = email
+        userInfo["type"] = type ? "Developer" : "Leader"
+        userInfo["acceptNews"] = true
+        
+        FirebaseService.sharedInstance.logInWithSocial(credential: credential, userInfo: userInfo) { (user, error) in
+            if let error = error {
+                let message = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: message)
+                return
+            } else {
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = type ?
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
+                self.present(newViewController, animated: true, completion: nil)
+                return
             }
         }
     }

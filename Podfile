@@ -19,7 +19,7 @@ target 'FundSpace' do
   pod 'Firebase/Storage'
   
   pod 'GoogleSignIn'
-
+  
   target 'FundSpaceTests' do
     inherit! :search_paths
     # Pods for testing

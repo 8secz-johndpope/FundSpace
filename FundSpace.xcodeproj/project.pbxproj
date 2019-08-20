@@ -20,6 +20,12 @@
 		849CD239230B1EEE0047F70F /* terms_developer.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD237230B1EED0047F70F /* terms_developer.html */; };
 		849CD23A230B1EEE0047F70F /* terms_lender.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD238230B1EEE0047F70F /* terms_lender.html */; };
 		849CD23C230B1F3F0047F70F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 849CD23B230B1F3F0047F70F /* GoogleService-Info.plist */; };
+		849CD24F230C433D0047F70F /* DeveloperTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD249230C433C0047F70F /* DeveloperTabBarController.swift */; };
+		849CD250230C433D0047F70F /* DeveloperProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24A230C433C0047F70F /* DeveloperProfileVC.swift */; };
+		849CD251230C433D0047F70F /* DeveloperInBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24B230C433D0047F70F /* DeveloperInBoxVC.swift */; };
+		849CD252230C433D0047F70F /* DeveloperNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24C230C433D0047F70F /* DeveloperNotificationVC.swift */; };
+		849CD253230C433D0047F70F /* DeveloperSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24D230C433D0047F70F /* DeveloperSearchVC.swift */; };
+		849CD254230C433D0047F70F /* GetStartedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24E230C433D0047F70F /* GetStartedVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -68,6 +74,12 @@
 		849CD237230B1EED0047F70F /* terms_developer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_developer.html; sourceTree = "<group>"; };
 		849CD238230B1EEE0047F70F /* terms_lender.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_lender.html; sourceTree = "<group>"; };
 		849CD23B230B1F3F0047F70F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		849CD249230C433C0047F70F /* DeveloperTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperTabBarController.swift; sourceTree = "<group>"; };
+		849CD24A230C433C0047F70F /* DeveloperProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperProfileVC.swift; sourceTree = "<group>"; };
+		849CD24B230C433D0047F70F /* DeveloperInBoxVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperInBoxVC.swift; sourceTree = "<group>"; };
+		849CD24C230C433D0047F70F /* DeveloperNotificationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperNotificationVC.swift; sourceTree = "<group>"; };
+		849CD24D230C433D0047F70F /* DeveloperSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeveloperSearchVC.swift; sourceTree = "<group>"; };
+		849CD24E230C433D0047F70F /* GetStartedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -258,6 +270,12 @@
 		BDBF8AF022F431E900F92DDA /* Developer */ = {
 			isa = PBXGroup;
 			children = (
+				849CD24B230C433D0047F70F /* DeveloperInBoxVC.swift */,
+				849CD24C230C433D0047F70F /* DeveloperNotificationVC.swift */,
+				849CD24A230C433C0047F70F /* DeveloperProfileVC.swift */,
+				849CD24D230C433D0047F70F /* DeveloperSearchVC.swift */,
+				849CD249230C433C0047F70F /* DeveloperTabBarController.swift */,
+				849CD24E230C433D0047F70F /* GetStartedVC.swift */,
 			);
 			path = Developer;
 			sourceTree = "<group>";
@@ -509,15 +527,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849CD254230C433D0047F70F /* GetStartedVC.swift in Sources */,
 				803EBC7D2302125E00CEC189 /* Extensions.swift in Sources */,
 				803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */,
 				BD0D4CB822F48077007DCCE5 /* SignUpVC.swift in Sources */,
 				803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */,
+				849CD251230C433D0047F70F /* DeveloperInBoxVC.swift in Sources */,
 				803EBC7F23021DA600CEC189 /* TermsVC.swift in Sources */,
 				BDBF8AC522F41FFF00F92DDA /* LogInVC.swift in Sources */,
 				849CD236230B1E110047F70F /* Firebase.swift in Sources */,
 				BDBF8AC322F41FFF00F92DDA /* AppDelegate.swift in Sources */,
+				849CD24F230C433D0047F70F /* DeveloperTabBarController.swift in Sources */,
+				849CD252230C433D0047F70F /* DeveloperNotificationVC.swift in Sources */,
 				BD0D4CB622F473C7007DCCE5 /* Utils.swift in Sources */,
+				849CD250230C433D0047F70F /* DeveloperProfileVC.swift in Sources */,
+				849CD253230C433D0047F70F /* DeveloperSearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

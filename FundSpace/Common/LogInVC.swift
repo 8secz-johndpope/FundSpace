@@ -22,7 +22,7 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     var showPasswordBtn: UIButton!
     var _showPassword: Bool = false // Determine if password is visible.
     var _isDeveloper: Bool = true // Determine if user is developer or not.
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -98,12 +98,12 @@ class LogInVC: UIViewController, GIDSignInDelegate {
             return
         }
         
-        if (self.emailTextField.errorMessage != "") {
+        if (self.emailTextField.errorMessage != "" && self.emailTextField.errorMessage != nil) {
             Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the valid email address")
             return
         }
         
-        if (self.passwordTextField.errorMessage != "") {
+        if (self.passwordTextField.errorMessage != "" && self.passwordTextField.errorMessage != nil) {
             Utils.sharedInstance.showNotice(title: "Notice", message: "Please input the strong password.")
             return
         }
@@ -112,9 +112,13 @@ class LogInVC: UIViewController, GIDSignInDelegate {
         FirebaseService.sharedInstance.logInUser(email: email, password: password) { (user, error) in
             SVProgressHUD.dismiss()
             if error == nil {
-//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
-//                self.present(newViewController, animated: true, completion: nil)
+                let isDeveloper: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = isDeveloper ?
+                                            storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                                            storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
+                    
+                self.present(newViewController, animated: true, completion: nil)
             } else {
                 let errorMessage: String = error?.localizedDescription ?? ""
                 Utils.sharedInstance.showError(title: "Error", message: errorMessage)
@@ -129,6 +133,7 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     }
     
     @IBAction func facebookBtn_Click(_ sender: Any) {
+        
     }
     
     @IBAction func userTypeBtn_Click(_ sender: Any) {
@@ -210,9 +215,11 @@ class LogInVC: UIViewController, GIDSignInDelegate {
                 Utils.sharedInstance.showError(title: "Error", message: message)
                 return
             } else {
-//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
-//                self.present(newViewController, animated: true, completion: nil)
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = type ?
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
+                self.present(newViewController, animated: true, completion: nil)
                 return
             }
         }

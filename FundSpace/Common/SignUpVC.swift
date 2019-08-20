@@ -153,13 +153,14 @@ class SignUpVC: UIViewController {
             SVProgressHUD.dismiss()
             if error == nil {
                 Utils.sharedInstance.showSuccess(title: "Success", message: "Your account was created successfully.")
-//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
-//                self.present(newViewController, animated: true, completion: nil)
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = type ?
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
+                self.present(newViewController, animated: true, completion: nil)
             } else {
                 let errorMessage: String = error?.localizedDescription ?? ""
                 Utils.sharedInstance.showError(title: "Error", message: errorMessage)
-//                Helper.sharedInstance.showNotice(_self: self, messageStr: errorMessage!)
             }
         }
     }

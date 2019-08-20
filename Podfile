@@ -20,6 +20,11 @@ target 'FundSpace' do
   
   pod 'GoogleSignIn'
   
+  pod 'FacebookCore', '~> 0.5.0'
+  pod 'FacebookLogin', '~> 0.5.0'
+  pod 'FacebookShare', '~> 0.5.0'
+  
+  
   target 'FundSpaceTests' do
     inherit! :search_paths
     # Pods for testing

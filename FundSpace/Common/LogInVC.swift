@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FacebookCore
+import FacebookLogin
 import SkyFloatingLabelTextField
 import SVProgressHUD
 import GoogleSignIn
@@ -22,6 +24,8 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     var showPasswordBtn: UIButton!
     var _showPassword: Bool = false // Determine if password is visible.
     var _isDeveloper: Bool = true // Determine if user is developer or not.
+    
+    private let readPermissions: [ReadPermission] = [ .publicProfile, .email]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +137,8 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     }
     
     @IBAction func facebookBtn_Click(_ sender: Any) {
-        
+        let loginManager = LoginManager()
+        loginManager.logIn(readPermissions: readPermissions, viewController: self, completion: didReceiveFacebookLoginResult)
     }
     
     @IBAction func userTypeBtn_Click(_ sender: Any) {
@@ -190,6 +195,10 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if let error = error {
             let message = error.localizedDescription
+            if (message.contains("be completed")) {
+                return
+            }
+            
             Utils.sharedInstance.showError(title: "Error", message: message)
             return
         }
@@ -227,6 +236,45 @@ class LogInVC: UIViewController, GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
         
+    }
+    
+    // MARK: Facebook Login Callback
+    private func didReceiveFacebookLoginResult(loginResult: LoginResult) {
+        switch loginResult {
+        case .failed(let error):
+            didFailedWithFacebook(error: error)
+        case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+            didLoginWithFacebook()
+        case .cancelled: break
+        default: break
+        }
+    }
+    
+    fileprivate func didFailedWithFacebook(error: Error) {
+        let errorMessage: String = error.localizedDescription 
+        Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+    }
+    
+    fileprivate func didLoginWithFacebook() {
+        // Successful log in with Facebook
+        if let accessToken = AccessToken.current {
+            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken as! String)
+            
+            var userInfo: [String: Any] = [:]
+            
+            FirebaseService.sharedInstance.logInWithSocial(credential: credential, userInfo: userInfo) { (user, error) in
+                if let error = error {
+                    let message = error.localizedDescription
+                    Utils.sharedInstance.showError(title: "Error", message: message)
+                    return
+                } else {
+//                    let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+//                    self.present(newViewController, animated: true, completion: nil)
+                    return
+                }
+            }
+        }
     }
 }
 

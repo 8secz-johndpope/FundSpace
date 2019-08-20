@@ -206,6 +206,7 @@
                     <navigationItem key="navigationItem" id="FlP-y3-GSb"/>
                     <connections>
                         <outlet property="emailTextField" destination="xCt-rO-3gE" id="790-PT-T5R"/>
+                        <outlet property="googleBtn" destination="OoU-0h-eT8" id="tZk-9c-dTw"/>
                         <outlet property="loginBtn" destination="OCV-tk-mGc" id="EOt-Oa-io4"/>
                         <outlet property="passwordTextField" destination="Pqr-w5-n5F" id="e55-k1-l9L"/>
                         <outlet property="userTypeBtn" destination="Lky-hk-UoW" id="NHU-DI-sDN"/>

@@ -17,6 +17,8 @@ target 'FundSpace' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  
+  pod 'GoogleSignIn'
 
   target 'FundSpaceTests' do
     inherit! :search_paths

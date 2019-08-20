@@ -9,12 +9,15 @@
 import UIKit
 import SkyFloatingLabelTextField
 import SVProgressHUD
+import GoogleSignIn
+import Firebase
 
-class LogInVC: UIViewController {
+class LogInVC: UIViewController, GIDSignInDelegate {
     @IBOutlet weak var emailTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var passwordTextField: SkyFloatingLabelTextField!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var userTypeBtn: UIButton!
+    @IBOutlet weak var googleBtn: GIDSignInButton!
     
     var showPasswordBtn: UIButton!
     var _showPassword: Bool = false // Determine if password is visible.
@@ -120,6 +123,9 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func googleBtn_Click(_ sender: Any) {
+        GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        GIDSignIn.sharedInstance()?.signIn()
     }
     
     @IBAction func facebookBtn_Click(_ sender: Any) {
@@ -173,6 +179,47 @@ class LogInVC: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK: Google SignIn Delegate
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if let error = error {
+            let message = error.localizedDescription
+            Utils.sharedInstance.showError(title: "Error", message: message)
+            return
+        }
+        
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        let email: String = user.profile.email
+        let name: String = user.profile.name
+        
+        let type: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+        
+        var userInfo: [String: Any] = [:]
+        userInfo["name"] = name
+        userInfo["email"] = email
+        userInfo["type"] = type ? "Developer" : "Leader"
+        userInfo["acceptNews"] = true
+        
+        FirebaseService.sharedInstance.logInWithSocial(credential: credential, userInfo: userInfo) { (user, error) in
+            if let error = error {
+                let message = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: message)
+                return
+            } else {
+//                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabViewController
+//                self.present(newViewController, animated: true, completion: nil)
+                return
+            }
+        }
+    }
+    
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
     }
 }
 

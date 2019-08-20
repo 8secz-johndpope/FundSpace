@@ -26,7 +26,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.316297604210-1ui39d1j0g3q475l6p1oiqkssdtu7jom</string>
-                <string>fb430008204426478</string>
+				<string>fb430008204426478</string>
 			</array>
 		</dict>
 	</array>
@@ -62,16 +62,20 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>FacebookAppID</key>
-    <string>430008204426478</string>
-    <key>FacebookDisplayName</key>
-    <string>FundSpace</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>fbapi</string>
-        <string>fb-messenger-share-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
-    </array>
+	<key>FacebookAppID</key>
+	<string>430008204426478</string>
+	<key>FacebookDisplayName</key>
+	<string>FundSpace</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
+    <key>NSCameraUsageDescription</key>
+    <string>This app wants to take pictures.</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app wants to use your photos.</string>
 </dict>
 </plist>

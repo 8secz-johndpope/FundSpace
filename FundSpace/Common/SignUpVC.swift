@@ -152,12 +152,15 @@ class SignUpVC: UIViewController {
         FirebaseService.sharedInstance.signUpUser(userInfo: userInfo) { (user, error) in
             SVProgressHUD.dismiss()
             if error == nil {
+                userInfo.removeValue(forKey: "password")
+                UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                
                 Utils.sharedInstance.showSuccess(title: "Success", message: "Your account was created successfully.")
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let newViewController = type ?
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
-                self.present(newViewController, animated: true, completion: nil)
+                    storyBoard.instantiateViewController(withIdentifier: "getStartedDeveloperVC") as! GetStartedDeveloperVC :
+                    storyBoard.instantiateViewController(withIdentifier: "getStartedLeaderVC") as! GetStartedLeaderVC
+                self.navigationController?.pushViewController(newViewController, animated: true)
             } else {
                 let errorMessage: String = error?.localizedDescription ?? ""
                 Utils.sharedInstance.showError(title: "Error", message: errorMessage)

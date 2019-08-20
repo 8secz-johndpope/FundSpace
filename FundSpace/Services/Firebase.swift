@@ -12,6 +12,7 @@ import Firebase
 class FirebaseService {
     static let sharedInstance = FirebaseService()
     let db = Firestore.firestore()
+    let storage = Storage.storage()
     var ref: DocumentReference? = nil
     var currentUser: User? = nil
     
@@ -25,6 +26,7 @@ class FirebaseService {
         Auth.auth().createUser(withEmail: userInfo["email"] as! String, password: userInfo["password"] as! String) { (user, error) in
             if error == nil {
                 let uid = user?.user.uid
+                
                 var tmp: [String: Any] = userInfo
                 tmp.removeValue(forKey: "password")
                 self.storeUserInfo(id: uid!, userInfo: tmp, completion: { (error) in
@@ -47,11 +49,11 @@ class FirebaseService {
     
     // Log In with Social Account such as Google, Facebook
     func logInWithSocial(credential: Any, userInfo: [String: Any], completion: @escaping (AuthDataResult?, Error?) -> Void) {
-        Auth.auth().signInAndRetrieveData(with: credential as! AuthCredential) { (authResult, error) in
+        Auth.auth().signIn(with: credential as! AuthCredential) { (authResult, error) in
             if let error = error {
                 completion(nil, error)
             } else {
-                self.storeUserInfo(id:     (authResult?.user.uid)!, userInfo: userInfo, completion: { (error) in
+                self.storeUserInfo(id: (authResult?.user.uid)!, userInfo: userInfo, completion: { (error) in
                     if error == nil {
                         completion(authResult, nil)
                     } else {
@@ -82,6 +84,40 @@ class FirebaseService {
         }
     }
     
-    func uploadImage(imageData: Data, completion: @escaping (String?, Error?) -> Void) {
+    func uploadImage(imageData: Data?, completion: @escaping (String?, Error?) -> Void) {
+        let user_id: String = Auth.auth().currentUser!.uid
+        
+        if (imageData == nil) {
+            completion(user_id, nil)
+            return
+        }
+        
+        let profileRef = storage.reference().child(user_id + "/profile/profile.png")
+        profileRef.putData(imageData!, metadata: nil) { (metadata, error) in
+            guard let _ = metadata else {
+                completion("error", error)
+                return
+            }
+            
+            profileRef.downloadURL(completion: { (url, error) in
+                if (error != nil) {
+                    completion("error", error)
+                    return
+                }
+                
+                if let profileImage = url?.absoluteString {
+                    var tmp: [String: Any] = [:]
+                    tmp["profile_pic"] = profileImage
+                    
+                    self.storeUserInfo(id: user_id, userInfo: tmp, completion: { (error) in
+                        if error == nil {
+                            completion(user_id, nil)
+                        } else {
+                            completion(nil, error)
+                        }
+                    })
+                }
+            })
+        }
     }
 }

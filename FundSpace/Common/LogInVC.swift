@@ -116,13 +116,27 @@ class LogInVC: UIViewController, GIDSignInDelegate {
         FirebaseService.sharedInstance.logInUser(email: email, password: password) { (user, error) in
             SVProgressHUD.dismiss()
             if error == nil {
-                let isDeveloper: Bool = UserDefaults.standard.bool(forKey: "isDeveloper")
+                let userInfo: [String: Any] = user as! [String: Any]
+                let isDeveloper: Bool = userInfo["type"] as! String == "Developer" ? true : false
+                
+                UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                
+                let hasBasic: Bool = userInfo["has_basic"] as? Bool ?? false
+                
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = isDeveloper ?
-                                            storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
-                                            storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
+                
+                if (hasBasic) {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                        storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabBarController
                     
-                self.present(newViewController, animated: true, completion: nil)
+                    self.present(newViewController, animated: true, completion: nil)
+                } else {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedDeveloperVC") as! GetStartedDeveloperVC :
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedLeaderVC") as! GetStartedLeaderVC
+                    self.navigationController?.pushViewController(newViewController, animated: true)
+                }
             } else {
                 let errorMessage: String = error?.localizedDescription ?? ""
                 Utils.sharedInstance.showError(title: "Error", message: errorMessage)
@@ -228,11 +242,27 @@ class LogInVC: UIViewController, GIDSignInDelegate {
                 Utils.sharedInstance.showError(title: "Error", message: message)
                 return
             } else {
+                let userInfo: [String: Any] = user as! [String: Any]
+                let isDeveloper: Bool = userInfo["type"] as! String == "Developer" ? true : false
+                
+                UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                
+                let hasBasic: Bool = userInfo["has_basic"] as? Bool ?? false
+                
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = type ?
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
-                self.present(newViewController, animated: true, completion: nil)
+                
+                if (hasBasic) {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                        storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabBarController
+                    
+                    self.present(newViewController, animated: true, completion: nil)
+                } else {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedDeveloperVC") as! GetStartedDeveloperVC :
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedLeaderVC") as! GetStartedLeaderVC
+                    self.navigationController?.pushViewController(newViewController, animated: true)
+                }
                 return
             }
         }
@@ -293,12 +323,27 @@ class LogInVC: UIViewController, GIDSignInDelegate {
                 Utils.sharedInstance.showError(title: "Error", message: message)
                 return
             } else {
+                let userInfo: [String: Any] = user as! [String: Any]
+                let isDeveloper: Bool = userInfo["type"] as! String == "Developer" ? true : false
+                
+                UserDefaults.standard.set(userInfo, forKey: "userInfo")
+                
+                let hasBasic: Bool = userInfo["has_basic"] as? Bool ?? false
+                
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = type ?
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
-                    storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController
-                self.present(newViewController, animated: true, completion: nil)
-                return
+                
+                if (hasBasic) {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
+                        storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabBarController
+                    
+                    self.present(newViewController, animated: true, completion: nil)
+                } else {
+                    let newViewController = isDeveloper ?
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedDeveloperVC") as! GetStartedDeveloperVC :
+                        storyBoard.instantiateViewController(withIdentifier: "getStartedLeaderVC") as! GetStartedLeaderVC
+                    self.navigationController?.pushViewController(newViewController, animated: true)
+                }
             }
         }
     }

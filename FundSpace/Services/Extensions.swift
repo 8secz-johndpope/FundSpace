@@ -14,3 +14,65 @@ extension UIViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
 }
+
+extension UIView {
+    
+    /// Adds bottom border to the view with given side margins
+    ///
+    /// - Parameters:
+    ///   - color: the border color
+    ///   - margins: the left and right margin
+    ///   - borderLineSize: the size of the border
+    func addBottomBorder(color: UIColor = UIColor.red, margins: CGFloat = 0, borderLineSize: CGFloat = 1) {
+        let border = UIView()
+        border.backgroundColor = color
+        border.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(border)
+        border.addConstraint(NSLayoutConstraint(item: border,
+                                                attribute: .height,
+                                                relatedBy: .equal,
+                                                toItem: nil,
+                                                attribute: .height,
+                                                multiplier: 1, constant: borderLineSize))
+        self.addConstraint(NSLayoutConstraint(item: border,
+                                              attribute: .bottom,
+                                              relatedBy: .equal,
+                                              toItem: self,
+                                              attribute: .bottom,
+                                              multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: border,
+                                              attribute: .leading,
+                                              relatedBy: .equal,
+                                              toItem: self,
+                                              attribute: .leading,
+                                              multiplier: 1, constant: margins))
+        self.addConstraint(NSLayoutConstraint(item: border,
+                                              attribute: .trailing,
+                                              relatedBy: .equal,
+                                              toItem: self,
+                                              attribute: .trailing,
+                                              multiplier: 1, constant: margins))
+    }
+    
+    func makeRoundShadowView() {
+        self.layer.cornerRadius = 12
+        self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+        self.layer.shadowRadius = 14
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowOpacity = 1
+        self.layer.shadowPath = UIBezierPath(rect: self.bounds).cgPath
+    }
+}
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
+}

@@ -12,6 +12,9 @@ target 'FundSpace' do
   pod 'Atributika'
   pod 'SVProgressHUD'
   pod 'SCLAlertView'
+  pod 'DropDown'
+  pod 'M13ProgressSuite'
+  pod 'Charts'
   
   pod 'Firebase/Core'
   pod 'Firebase/Auth'

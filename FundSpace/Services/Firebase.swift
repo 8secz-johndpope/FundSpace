@@ -30,7 +30,18 @@ class FirebaseService {
                 var tmp: [String: Any] = userInfo
                 tmp.removeValue(forKey: "password")
                 self.storeUserInfo(id: uid!, userInfo: tmp, completion: { (error) in
-                    completion(user, error)
+                    if (error != nil) {
+                        completion(nil, error)
+                        return
+                    }
+                    
+                    self.db.collection("users").document(uid!).getDocument(completion: { (document, error) in
+                        if let document = document, document.exists {
+                            completion(document.data(), nil)
+                        } else {
+                            completion([:], nil)
+                        }
+                    })
                 })
             } else {
                 completion(user, error)
@@ -40,25 +51,44 @@ class FirebaseService {
     
     
     // Log In with Email and Password
-    func logInUser(email: String, password: String, completion: @escaping (AuthDataResult?, Error?) -> Void) {
+    func logInUser(email: String, password: String, completion: @escaping (Any?, Error?) -> Void) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-            completion(user, error)
+            if (error == nil) {
+                let uid = user?.user.uid
+                
+                self.db.collection("users").document(uid!).getDocument(completion: { (document, error) in
+                    if let document = document, document.exists {
+                        completion(document.data(), nil)
+                    } else {
+                        completion([:], nil)
+                    }
+                })
+            } else {
+                completion(user, error)
+            }
         }
     }
     
     
     // Log In with Social Account such as Google, Facebook
-    func logInWithSocial(credential: Any, userInfo: [String: Any], completion: @escaping (AuthDataResult?, Error?) -> Void) {
+    func logInWithSocial(credential: Any, userInfo: [String: Any], completion: @escaping (Any?, Error?) -> Void) {
         Auth.auth().signIn(with: credential as! AuthCredential) { (authResult, error) in
             if let error = error {
                 completion(nil, error)
             } else {
                 self.storeUserInfo(id: (authResult?.user.uid)!, userInfo: userInfo, completion: { (error) in
-                    if error == nil {
-                        completion(authResult, nil)
-                    } else {
+                    if (error != nil) {
                         completion(nil, error)
+                        return
                     }
+                    
+                    self.db.collection("users").document((authResult?.user.uid)!).getDocument(completion: { (document, error) in
+                        if let document = document, document.exists {
+                            completion(document.data(), nil)
+                        } else {
+                            completion([:], nil)
+                        }
+                    })
                 })
             }
         }
@@ -84,6 +114,7 @@ class FirebaseService {
         }
     }
     
+    // Upload profile image and update the user info.
     func uploadImage(imageData: Data?, completion: @escaping (String?, Error?) -> Void) {
         let user_id: String = Auth.auth().currentUser!.uid
         
@@ -118,6 +149,78 @@ class FirebaseService {
                     })
                 }
             })
+        }
+    }
+    
+    // Download user profile image
+    func downloadImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
+        let profileRef = storage.reference(forURL: path)
+        
+        profileRef.getData(maxSize: 100 * 1024 * 1024) { (data, error) in
+            completion(data, error)
+        }
+    }
+    
+    // Fetch previous projects for developer
+    func fetchPreviousProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        let group = DispatchGroup()
+        let user_id: String = Auth.auth().currentUser!.uid
+        db.collection("users").document(user_id).getDocument(completion: { (document, error) in
+            if let document = document, document.exists {
+                var result: Array<[String: Any]> = []
+                let prevProjectIDs: Array<String> = document.get("prevProjectIDs") as? Array<String> ?? []
+                for prevProjectID in prevProjectIDs {
+                    group.enter()
+                    self.db.collection("prev_projects").document(prevProjectID).getDocument(completion: { (prevDocument, prevError) in
+                        if let prevDocument = prevDocument, prevDocument.exists {
+                            var tmp: [String: Any] = prevDocument.data()!
+                            tmp["id"] = prevDocument.documentID
+                            result.append(tmp)
+                            group.leave()
+                        } else {
+                            completion([], prevError)
+                        }
+                    })
+                }
+                completion(result, nil)
+            } else {
+                completion([], error)
+            }
+        })
+    }
+    
+    func updatePreviousProject(prevProject: [String: Any], completion: @escaping (Error?) -> Void) {
+        let id: String = prevProject["id"] as? String ?? ""
+        if id == "" {
+            var ref: DocumentReference? = nil
+            ref = db.collection("prev_projects").addDocument(data: prevProject) { (error) in
+                if let error = error {
+                    completion(error)
+                } else {
+                    let user_id: String = Auth.auth().currentUser!.uid
+                    self.db.collection("users").document(user_id).getDocument(completion: { (document, error) in
+                        if let error = error {
+                            completion(error)
+                            return
+                        }
+                        
+                        var IDs: Array<String> = []
+                        if let document = document, document.exists {
+                            IDs = document.get("prevProjectIDs") as? Array<String> ?? []
+                        }
+                        
+                        IDs.append(ref!.documentID)
+                        
+                        self.storeUserInfo(id: user_id, userInfo: ["prevProjectIDs": IDs], completion: { (error) in
+                            completion(error)
+                        })
+                    })
+                }
+            }
+        } else {
+            db.collection("prev_projects").document(id).setData(prevProject, merge: true) { (error) in
+                completion(error)
+            }
         }
     }
 }

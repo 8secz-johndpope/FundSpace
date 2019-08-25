@@ -102,8 +102,6 @@ class DeveloperProfileVC: UIViewController {
     }
     
     func initUI() {
-        
-        
         let bordorColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
         basicInfoView.makeRoundShadowView()
         profileImageView.layer.masksToBounds = true
@@ -219,7 +217,7 @@ class DeveloperProfileVC: UIViewController {
             
             isNewPrevProject = true
         } else {
-            let prevProject = prevProjects[0]
+            let prevProject = prevProjects[index]
             projectNameTextField.text = prevProject["name"] as? String ?? ""
             projectAddressTextField.text = prevProject["address"] as? String ?? ""
             projectPurchaseTextField.text = prevProject["purchase"] as? String ?? ""

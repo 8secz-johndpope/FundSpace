@@ -16,6 +16,9 @@ class FirebaseService {
     var ref: DocumentReference? = nil
     var currentUser: User? = nil
     
+    fileprivate var userProjectsCount = 0
+    fileprivate var userProjectsResultCount = 0
+    
     init() {
         currentUser = Auth.auth().currentUser
     }
@@ -163,26 +166,30 @@ class FirebaseService {
     
     // Fetch previous projects for developer
     func fetchPreviousProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
-        let group = DispatchGroup()
         let user_id: String = Auth.auth().currentUser!.uid
         db.collection("users").document(user_id).getDocument(completion: { (document, error) in
             if let document = document, document.exists {
                 var result: Array<[String: Any]> = []
                 let prevProjectIDs: Array<String> = document.get("prevProjectIDs") as? Array<String> ?? []
+                
+                self.userProjectsCount = prevProjectIDs.count
+                self.userProjectsResultCount = 0
+                
                 for prevProjectID in prevProjectIDs {
-                    group.enter()
                     self.db.collection("prev_projects").document(prevProjectID).getDocument(completion: { (prevDocument, prevError) in
+                        self.userProjectsResultCount += 1
                         if let prevDocument = prevDocument, prevDocument.exists {
                             var tmp: [String: Any] = prevDocument.data()!
                             tmp["id"] = prevDocument.documentID
                             result.append(tmp)
-                            group.leave()
-                        } else {
-                            completion([], prevError)
+                        }
+                
+                        if self.userProjectsCount == self.userProjectsResultCount {
+                            completion(result, nil)
                         }
                     })
                 }
-                completion(result, nil)
+//                completion(result, nil)
             } else {
                 completion([], error)
             }

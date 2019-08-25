@@ -29,6 +29,7 @@
 		849CD254230C433D0047F70F /* GetStartedDeveloperVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD24E230C433D0047F70F /* GetStartedDeveloperVC.swift */; };
 		849CD256230C8FAD0047F70F /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD255230C8FAD0047F70F /* ImagePicker.swift */; };
 		849CD259230CA2600047F70F /* GetStartedLeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD258230CA2600047F70F /* GetStartedLeaderVC.swift */; };
+		84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AAB4C72312AB4A00EAC830 /* LeaderProfileVC.swift */; };
 		84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37932230FCAE6003E02E0 /* iOSDropDown.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
@@ -87,6 +88,7 @@
 		849CD24E230C433D0047F70F /* GetStartedDeveloperVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetStartedDeveloperVC.swift; sourceTree = "<group>"; };
 		849CD255230C8FAD0047F70F /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		849CD258230CA2600047F70F /* GetStartedLeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStartedLeaderVC.swift; sourceTree = "<group>"; };
+		84AAB4C72312AB4A00EAC830 /* LeaderProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderProfileVC.swift; sourceTree = "<group>"; };
 		84C37932230FCAE6003E02E0 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			children = (
 				849CD258230CA2600047F70F /* GetStartedLeaderVC.swift */,
 				8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */,
+				84AAB4C72312AB4A00EAC830 /* LeaderProfileVC.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -558,6 +561,7 @@
 				849CD236230B1E110047F70F /* Firebase.swift in Sources */,
 				BDBF8AC322F41FFF00F92DDA /* AppDelegate.swift in Sources */,
 				84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */,
+				84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */,
 				849CD24F230C433D0047F70F /* DeveloperTabBarController.swift in Sources */,
 				849CD259230CA2600047F70F /* GetStartedLeaderVC.swift in Sources */,
 				8414740D230D1D6D00A7C14F /* LeaderTabBarController.swift in Sources */,

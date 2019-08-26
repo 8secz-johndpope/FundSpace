@@ -40,7 +40,7 @@ class Utils: NSObject {
     func showSuccess(title: String, message: String) {
         SCLAlertView().showSuccess(title, subTitle: message)
     }
-    
+        
     // Show the notice message alert
     func showNotice(title: String, message: String) {
         SCLAlertView().showNotice(title, subTitle: message)

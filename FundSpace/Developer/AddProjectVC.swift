@@ -8,6 +8,8 @@
 
 import UIKit
 import M13ProgressSuite
+import SVProgressHUD
+import SCLAlertView
 
 class AddProjectVC: UIViewController {
     @IBOutlet weak var progressBar: M13ProgressViewBar!
@@ -150,6 +152,55 @@ class AddProjectVC: UIViewController {
     }
     
     func shareProject() {
+        let title: String = addProjectStep1VC.projectTitleTextField.text ?? ""
+        let type: String = addProjectStep2VC.fundingTypeTextField.text ?? ""
+        let hasFullPermission: Bool = addProjectStep2VC.fullPermissionTextField.text == "No" ? false : true
+        let street: String = addProjectStep3VC.streetTextField.text ?? ""
+        let city: String = addProjectStep3VC.cityTextField.text ?? ""
+        let county: String = addProjectStep3VC.countyTextField.text ?? ""
+        let postalCode: String = addProjectStep3VC.postalTextField.text ?? ""
+        let purchase: String = addProjectStep4VC.purchaseTextField.text ?? ""
+        let build: String = addProjectStep4VC.buildTextField.text ?? ""
+        let current: String = addProjectStep5VC.currentTextField.text ?? ""
+        let gdv: String = addProjectStep5VC.gdvTextField.text ?? ""
+        let secuityType: Int = addProjectStep6VC.firstCheckBox.isChecked ? 1 : 2
+        let duration: String = addProjectStep6VC.fundDuration.text ?? ""
+        let strategy: String = addProjectStep7VC.sellCheckBox.isChecked ? "Sell" : "Refinance"
+        let contribute: String = addProjectStep7VC.captialCostTextField.text ?? ""
+        
+        var projectInfo: [String: Any] = [:]
+        projectInfo["title"] = title
+        projectInfo["type"] = type
+        projectInfo["hasFullPermission"] = hasFullPermission
+        projectInfo["street"] = street
+        projectInfo["city"] = city
+        projectInfo["county"] = county
+        projectInfo["postalCode"] = postalCode
+        projectInfo["purchase"] = purchase
+        projectInfo["build"] = build
+        projectInfo["current"] = current
+        projectInfo["gdv"] = gdv
+        projectInfo["secuityType"] = secuityType
+        projectInfo["duration"] = duration
+        projectInfo["strategy"] = strategy
+        projectInfo["contribute"] = contribute
+        
+        SVProgressHUD.show()
+        FirebaseService.sharedInstance.addProject(projectInfo: projectInfo) { (error) in
+            SVProgressHUD.dismiss()
+            if let error = error {
+                let errorMessage: String = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+                return
+            }
+            
+            let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
+            let successAlert = SCLAlertView(appearance: appearance)
+            successAlert.addButton("OK", action: {
+                self.navigationController?.popViewController(animated: true)
+            })
+            successAlert.showSuccess("Success", subTitle: "The new project was added successfully.")
+        }
         
     }
     
@@ -177,9 +228,11 @@ class AddProjectVC: UIViewController {
             nextBtn.setTitle("Share", for: .normal)
         case 7:
             shareProject()
+            return
         default:
             break
         }
+        
         step = step + 1
         progressBar.setProgress(CGFloat(step)/7, animated: true)
     }

@@ -11,7 +11,7 @@ import SkyFloatingLabelTextField
 
 class AddProjectStep1VC: UIViewController {
 
-    @IBOutlet weak var projectTtitleTextField: SkyFloatingLabelTextField!
+    @IBOutlet weak var projectTitleTextField: SkyFloatingLabelTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class AddProjectStep1VC: UIViewController {
     
 
     func initUI() {
-        projectTtitleTextField.font = UIFont(name: "OpenSans", size: 15)
+        projectTitleTextField.font = UIFont(name: "OpenSans", size: 15)
     }
 
 }

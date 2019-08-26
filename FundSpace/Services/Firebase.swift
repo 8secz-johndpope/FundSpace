@@ -230,4 +230,32 @@ class FirebaseService {
             }
         }
     }
+    
+    func addProject(projectInfo: [String: Any], completion: @escaping (Error?) -> Void) {
+        var ref: DocumentReference? = nil
+        ref = db.collection("projects").addDocument(data: projectInfo) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                let user_id: String = Auth.auth().currentUser!.uid
+                self.db.collection("users").document(user_id).getDocument(completion: { (document, error) in
+                    if let error = error {
+                        completion(error)
+                        return
+                    }
+                    
+                    var IDs: Array<String> = []
+                    if let document = document, document.exists {
+                        IDs = document.get("projectIDs") as? Array<String> ?? []
+                    }
+                    
+                    IDs.append(ref!.documentID)
+                    
+                    self.storeUserInfo(id: user_id, userInfo: ["projectIDs": IDs], completion: { (error) in
+                        completion(error)
+                    })
+                })
+            }
+        }
+    }
 }

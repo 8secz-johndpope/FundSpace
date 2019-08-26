@@ -165,8 +165,6 @@ class DeveloperProfileVC: UIViewController {
     func makeEditable(_ flag: Bool) {
         profileImageBtn.isEnabled = flag
         
-        addProjectBtn.isEnabled = flag
-        
         experienceTextField.isEnabled = flag
         birthTextField.isEnabled = flag
         occupationTextField.isEnabled = flag
@@ -401,6 +399,9 @@ class DeveloperProfileVC: UIViewController {
     }
     
     @IBAction func addProjectBtn_Click(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "addProjectVC") as! AddProjectVC
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     @IBAction func uploadDocumentBtn_Click(_ sender: Any) {

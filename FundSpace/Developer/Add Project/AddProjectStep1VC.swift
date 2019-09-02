@@ -11,7 +11,7 @@ import SkyFloatingLabelTextField
 
 class AddProjectStep1VC: UIViewController {
 
-    @IBOutlet weak var projectTitleTextField: SkyFloatingLabelTextField!
+    @IBOutlet var projectTitleTextField: SkyFloatingLabelTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

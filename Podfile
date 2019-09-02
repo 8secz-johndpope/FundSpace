@@ -22,6 +22,8 @@ target 'FundSpace' do
   pod 'Firebase/Storage'
   
   pod 'GoogleSignIn'
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
   
   pod 'FacebookCore', '~> 0.5.0'
   pod 'FacebookLogin', '~> 0.5.0'

@@ -17,6 +17,8 @@
 		803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC8723022DC400CEC189 /* PrivacyVC.swift */; };
 		803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC89230230C000CEC189 /* ForgotVC.swift */; };
 		8414740D230D1D6D00A7C14F /* LeaderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */; };
+		8440BD73231CEFC5003A4302 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440BD72231CEFC5003A4302 /* RoundShadowView.swift */; };
+		8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */; };
 		849CD236230B1E110047F70F /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD235230B1E100047F70F /* Firebase.swift */; };
 		849CD239230B1EEE0047F70F /* terms_developer.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD237230B1EED0047F70F /* terms_developer.html */; };
 		849CD23A230B1EEE0047F70F /* terms_lender.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD238230B1EEE0047F70F /* terms_lender.html */; };
@@ -40,6 +42,7 @@
 		84AAB4D92312FB8400EAC830 /* AddProjectStep7VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AAB4D82312FB8400EAC830 /* AddProjectStep7VC.swift */; };
 		84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C37932230FCAE6003E02E0 /* iOSDropDown.swift */; };
 		84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8FF962313E15900E9EED0 /* Checkbox.swift */; };
+		84D8FF992315340000E9EED0 /* DeveloperProjectOverViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -85,6 +88,8 @@
 		803EBC8723022DC400CEC189 /* PrivacyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyVC.swift; sourceTree = "<group>"; };
 		803EBC89230230C000CEC189 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderTabBarController.swift; sourceTree = "<group>"; };
+		8440BD72231CEFC5003A4302 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
+		8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMagneticProgress.swift; sourceTree = "<group>"; };
 		849CD235230B1E100047F70F /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		849CD237230B1EED0047F70F /* terms_developer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_developer.html; sourceTree = "<group>"; };
 		849CD238230B1EEE0047F70F /* terms_lender.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_lender.html; sourceTree = "<group>"; };
@@ -108,6 +113,7 @@
 		84AAB4D82312FB8400EAC830 /* AddProjectStep7VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProjectStep7VC.swift; sourceTree = "<group>"; };
 		84C37932230FCAE6003E02E0 /* iOSDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDropDown.swift; sourceTree = "<group>"; };
 		84D8FF962313E15900E9EED0 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProjectOverViewVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -259,8 +265,10 @@
 				803EBC7C2302125E00CEC189 /* Extensions.swift */,
 				849CD235230B1E100047F70F /* Firebase.swift */,
 				849CD255230C8FAD0047F70F /* ImagePicker.swift */,
+				8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */,
 				84C37932230FCAE6003E02E0 /* iOSDropDown.swift */,
 				84D8FF962313E15900E9EED0 /* Checkbox.swift */,
+				8440BD72231CEFC5003A4302 /* RoundShadowView.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -334,6 +342,7 @@
 				849CD249230C433C0047F70F /* DeveloperTabBarController.swift */,
 				849CD24E230C433D0047F70F /* GetStartedDeveloperVC.swift */,
 				84AAB4C92312E14200EAC830 /* AddProjectVC.swift */,
+				84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */,
 			);
 			path = Developer;
 			sourceTree = "<group>";
@@ -601,6 +610,7 @@
 				849CD236230B1E110047F70F /* Firebase.swift in Sources */,
 				BDBF8AC322F41FFF00F92DDA /* AppDelegate.swift in Sources */,
 				84AAB4CF2312FB0100EAC830 /* AddProjectStep2VC.swift in Sources */,
+				8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */,
 				84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */,
 				84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */,
 				84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */,
@@ -609,7 +619,9 @@
 				8414740D230D1D6D00A7C14F /* LeaderTabBarController.swift in Sources */,
 				849CD252230C433D0047F70F /* DeveloperNotificationVC.swift in Sources */,
 				84AAB4D12312FB3600EAC830 /* AddProjectStep3VC.swift in Sources */,
+				8440BD73231CEFC5003A4302 /* RoundShadowView.swift in Sources */,
 				BD0D4CB622F473C7007DCCE5 /* Utils.swift in Sources */,
+				84D8FF992315340000E9EED0 /* DeveloperProjectOverViewVC.swift in Sources */,
 				849CD256230C8FAD0047F70F /* ImagePicker.swift in Sources */,
 				849CD250230C433D0047F70F /* DeveloperProfileVC.swift in Sources */,
 				849CD253230C433D0047F70F /* DeveloperSearchVC.swift in Sources */,

@@ -200,7 +200,10 @@ class FirebaseService {
         let id: String = prevProject["id"] as? String ?? ""
         if id == "" {
             var ref: DocumentReference? = nil
-            ref = db.collection("prev_projects").addDocument(data: prevProject) { (error) in
+            let user_id: String = Auth.auth().currentUser!.uid
+            var tmp = prevProject
+            tmp["userID"] = user_id
+            ref = db.collection("prev_projects").addDocument(data: tmp) { (error) in
                 if let error = error {
                     completion(error)
                 } else {
@@ -233,11 +236,13 @@ class FirebaseService {
     
     func addProject(projectInfo: [String: Any], completion: @escaping (Error?) -> Void) {
         var ref: DocumentReference? = nil
-        ref = db.collection("projects").addDocument(data: projectInfo) { (error) in
+        let user_id: String = Auth.auth().currentUser!.uid
+        var data = projectInfo
+        data["userID"] = user_id
+        ref = db.collection("projects").addDocument(data: data) { (error) in
             if let error = error {
                 completion(error)
             } else {
-                let user_id: String = Auth.auth().currentUser!.uid
                 self.db.collection("users").document(user_id).getDocument(completion: { (document, error) in
                     if let error = error {
                         completion(error)

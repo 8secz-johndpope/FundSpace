@@ -11,6 +11,9 @@ import IQKeyboardManagerSwift
 import Firebase
 import GoogleSignIn
 import FacebookCore
+import GoogleMaps
+
+let googleAPIKey = "AIzaSyDiKAPS7127lOxPdVlJawUSc6cKpUt-6-0"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+        
+        GMSServices.provideAPIKey(googleAPIKey)
                 
         return true
     }

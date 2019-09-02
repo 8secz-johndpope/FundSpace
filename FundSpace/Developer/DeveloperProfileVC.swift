@@ -80,6 +80,7 @@ class DeveloperProfileVC: UIViewController {
     @IBOutlet weak var assetsChatView: BarChartView!
     
     @IBOutlet weak var uploadDocumentBtn: UIButton!
+    @IBOutlet weak var logoutBtn: UIButton!
     
     var isSave: Bool = false
     var imagePicker: ImagePicker!
@@ -157,6 +158,10 @@ class DeveloperProfileVC: UIViewController {
         assetsView.makeRoundShadowView()
         
         uploadDocumentBtn.layer.cornerRadius = 4
+        
+        logoutBtn.layer.borderColor = UIColor(red: 0, green: 0.49, blue: 1, alpha: 1).cgColor
+        logoutBtn.layer.borderWidth = 1
+        logoutBtn.layer.cornerRadius = 4
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         
@@ -443,8 +448,16 @@ class DeveloperProfileVC: UIViewController {
             
             self.fetchPrevProjects()
         }
-        
     }
+    
+    @IBAction func logoutBtn_Click(_ sender: Any) {
+        UserDefaults.standard.set(nil, forKey: "userInfo")
+        
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC") as! LogInVC
+        self.present(newViewController, animated: true, completion: nil)
+    }
+    
 }
 
 extension DeveloperProfileVC: ImagePickerDelegate {

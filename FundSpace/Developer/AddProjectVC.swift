@@ -115,6 +115,8 @@ class AddProjectVC: UIViewController {
 
         // Do any additional setup after loading the view.
         initUI()
+        
+        self.add(asChildViewController: addProjectStep1VC)
     }
     
     func initUI() {
@@ -197,9 +199,11 @@ class AddProjectVC: UIViewController {
             let appearance = SCLAlertView.SCLAppearance(showCloseButton: false)
             let successAlert = SCLAlertView(appearance: appearance)
             successAlert.addButton("OK", action: {
-                self.navigationController?.popViewController(animated: true)
+                let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerProjectOverViewVC") as! DeveloperProjectOverViewVC
+                self.navigationController?.pushViewController(newViewController, animated: true)
             })
-            successAlert.showSuccess("Success", subTitle: "The new project was added successfully.")
+            successAlert.showSuccess("Success", subTitle: "Your project has been successfully posted!")
         }
         
     }

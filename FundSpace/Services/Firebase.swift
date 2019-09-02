@@ -234,18 +234,18 @@ class FirebaseService {
         }
     }
     
-    func addProject(projectInfo: [String: Any], completion: @escaping (Error?) -> Void) {
+    func addProject(projectInfo: [String: Any], completion: @escaping (String?, Error?) -> Void) {
         var ref: DocumentReference? = nil
         let user_id: String = Auth.auth().currentUser!.uid
         var data = projectInfo
         data["userID"] = user_id
         ref = db.collection("projects").addDocument(data: data) { (error) in
             if let error = error {
-                completion(error)
+                completion("", error)
             } else {
                 self.db.collection("users").document(user_id).getDocument(completion: { (document, error) in
                     if let error = error {
-                        completion(error)
+                        completion("", error)
                         return
                     }
                     
@@ -257,10 +257,56 @@ class FirebaseService {
                     IDs.append(ref!.documentID)
                     
                     self.storeUserInfo(id: user_id, userInfo: ["projectIDs": IDs], completion: { (error) in
+                        completion(ref!.documentID, error)
+                    })
+                })
+            }
+        }
+    }
+    
+    func getProjectByID(id: String, completion: @escaping([String: Any], Error?) -> Void) {
+        db.collection("projects").document(id).getDocument { (document, error) in
+            if let document = document, document.exists {
+                completion(document.data()!, error)
+                return
+            }
+            
+            completion([:], error)
+        }
+    }
+    
+    func updateProject(id: String, projectInfo: [String: Any], completion: @escaping (Error?) -> Void) {
+        db.collection("projects").document(id).setData(projectInfo, merge: true, completion: { (error) in
+            completion(error)
+        })
+    }
+    
+    func deleteProject(id: String, completion: @escaping (Error?) -> Void) {
+        let user_id = Auth.auth().currentUser?.uid
+        db.collection("projects").document(id).delete { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                self.db.collection("users").document(user_id!).getDocument(completion: { (document, error) in
+                    if let error = error {
+                        completion(error)
+                        return
+                    }
+                    
+                    var IDs: Array<String> = []
+                    if let document = document, document.exists {
+                        IDs = document.get("projectIDs") as? Array<String> ?? []
+                    }
+                    
+                    let index = IDs.firstIndex(of: id)
+                    IDs.remove(at: index!)
+                    
+                    self.storeUserInfo(id: user_id!, userInfo: ["projectIDs": IDs], completion: { (error) in
                         completion(error)
                     })
                 })
             }
+            
         }
     }
 }

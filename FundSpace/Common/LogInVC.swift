@@ -127,7 +127,7 @@ class LogInVC: UIViewController, GIDSignInDelegate {
                 
                 if (hasBasic) {
                     let newViewController = isDeveloper ?
-                        storyBoard.instantiateViewController(withIdentifier: "developerProjectOverViewVC") as! DeveloperProjectOverViewVC :
+                        storyBoard.instantiateViewController(withIdentifier: "developerTabVC") as! DeveloperTabBarController :
                         storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabBarController
                     
                     self.present(newViewController, animated: true, completion: nil)

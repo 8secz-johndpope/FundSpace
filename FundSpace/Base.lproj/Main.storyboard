@@ -455,7 +455,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVP-zh-szI">
-                                <rect key="frame" x="0.0" y="44" width="414" height="2818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="2769"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="xnL-bI-O18">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1968"/>
@@ -727,7 +727,7 @@
                                                                                                 <real key="value" value="6"/>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="progress">
-                                                                                                <real key="value" value="0.23000000000000001"/>
+                                                                                                <real key="value" value="0.0"/>
                                                                                             </userDefinedRuntimeAttribute>
                                                                                             <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="NO"/>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="inset">
@@ -1842,6 +1842,9 @@ GlRCQw
                                                         <state key="normal" title="Upload Supporting Documents">
                                                             <color key="titleColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="uploadDocumentBtn_Click:" destination="y3u-D7-fkF" eventType="touchUpInside" id="UTd-3T-ypa"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1882,6 +1885,9 @@ GlRCQw
                                                         <state key="normal" title="Delete">
                                                             <color key="titleColor" red="0.0" green="0.49019607840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="deleteProjectBtn_Click:" destination="y3u-D7-fkF" eventType="touchUpInside" id="Pvm-yB-i3k"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1915,6 +1921,8 @@ GlRCQw
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rOe-4p-yW0"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <size key="freeformSize" width="414" height="2896"/>
                     <connections>
                         <outlet property="costProfitChartView" destination="kfM-jv-PwT" id="iif-ba-TxK"/>

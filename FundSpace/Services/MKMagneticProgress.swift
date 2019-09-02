@@ -216,10 +216,6 @@ open class MKMagneticProgress: UIView {
     
     public func setProgress(progress: CGFloat, animated: Bool = true) {
         
-        if progress > 1.0 {
-            return
-        }
-        
         var start = progressShape.strokeEnd
         if let presentationLayer = progressShape.presentation(){
             if let count = progressShape.animationKeys()?.count, count > 0  {

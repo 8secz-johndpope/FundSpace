@@ -187,8 +187,13 @@ class AddProjectVC: UIViewController {
         projectInfo["strategy"] = strategy
         projectInfo["contribute"] = contribute
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        projectInfo["added"] = formatter.string(from: Date())
+        
         SVProgressHUD.show()
-        FirebaseService.sharedInstance.addProject(projectInfo: projectInfo) { (error) in
+        FirebaseService.sharedInstance.addProject(projectInfo: projectInfo) { (projectID, error) in
             SVProgressHUD.dismiss()
             if let error = error {
                 let errorMessage: String = error.localizedDescription
@@ -201,6 +206,7 @@ class AddProjectVC: UIViewController {
             successAlert.addButton("OK", action: {
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerProjectOverViewVC") as! DeveloperProjectOverViewVC
+                newViewController.projectID = projectID!
                 self.navigationController?.pushViewController(newViewController, animated: true)
             })
             successAlert.showSuccess("Success", subTitle: "Your project has been successfully posted!")

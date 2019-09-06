@@ -94,12 +94,18 @@ class DeveloperProfileVC: UIViewController {
 
         // Do any additional setup after loading the view.
         initUI()
+        initGesture()
         makeEditable(false)
         fetchInitData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    func initGesture() {
+        let creditPositionGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTapOnCreditPosition))
+        creditPositionView.addGestureRecognizer(creditPositionGesture)
     }
     
     func initUI() {
@@ -165,6 +171,12 @@ class DeveloperProfileVC: UIViewController {
         
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         
+    }
+    
+    @objc func handleTapOnCreditPosition() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "creditPositionVC") as! CreditPositionVC
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func makeEditable(_ flag: Bool) {

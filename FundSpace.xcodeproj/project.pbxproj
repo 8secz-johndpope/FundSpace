@@ -18,6 +18,11 @@
 		803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803EBC89230230C000CEC189 /* ForgotVC.swift */; };
 		8414740D230D1D6D00A7C14F /* LeaderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */; };
 		8440BD73231CEFC5003A4302 /* RoundShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440BD72231CEFC5003A4302 /* RoundShadowView.swift */; };
+		8468FB85231EDE9000FC7A31 /* CreditPositionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB84231EDE9000FC7A31 /* CreditPositionVC.swift */; };
+		8468FB8A23216D9900FC7A31 /* CreditPositionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB8923216D9900FC7A31 /* CreditPositionTableViewCell.swift */; };
+		8468FB922321AAE500FC7A31 /* expandedCreditPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */; };
+		8468FB9423221D2900FC7A31 /* creditPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8468FB9323221D2900FC7A31 /* creditPositionCell.xib */; };
+		8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */; };
 		8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */; };
 		849CD236230B1E110047F70F /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD235230B1E100047F70F /* Firebase.swift */; };
 		849CD239230B1EEE0047F70F /* terms_developer.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD237230B1EED0047F70F /* terms_developer.html */; };
@@ -89,6 +94,11 @@
 		803EBC89230230C000CEC189 /* ForgotVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotVC.swift; sourceTree = "<group>"; };
 		8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderTabBarController.swift; sourceTree = "<group>"; };
 		8440BD72231CEFC5003A4302 /* RoundShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundShadowView.swift; sourceTree = "<group>"; };
+		8468FB84231EDE9000FC7A31 /* CreditPositionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditPositionVC.swift; sourceTree = "<group>"; };
+		8468FB8923216D9900FC7A31 /* CreditPositionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditPositionTableViewCell.swift; sourceTree = "<group>"; };
+		8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = expandedCreditPositionCell.xib; sourceTree = "<group>"; };
+		8468FB9323221D2900FC7A31 /* creditPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = creditPositionCell.xib; sourceTree = "<group>"; };
+		8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedCreditPositionTableViewCell.swift; sourceTree = "<group>"; };
 		8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMagneticProgress.swift; sourceTree = "<group>"; };
 		849CD235230B1E100047F70F /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		849CD237230B1EED0047F70F /* terms_developer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_developer.html; sourceTree = "<group>"; };
@@ -343,6 +353,11 @@
 				849CD24E230C433D0047F70F /* GetStartedDeveloperVC.swift */,
 				84AAB4C92312E14200EAC830 /* AddProjectVC.swift */,
 				84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */,
+				8468FB84231EDE9000FC7A31 /* CreditPositionVC.swift */,
+				8468FB8923216D9900FC7A31 /* CreditPositionTableViewCell.swift */,
+				8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */,
+				8468FB9323221D2900FC7A31 /* creditPositionCell.xib */,
+				8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */,
 			);
 			path = Developer;
 			sourceTree = "<group>";
@@ -456,11 +471,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8468FB922321AAE500FC7A31 /* expandedCreditPositionCell.xib in Resources */,
 				BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */,
 				BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */,
 				BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */,
 				BD0D4CB322F46F9E007DCCE5 /* Open Sans Regular.ttf in Resources */,
 				BDBF8ACD22F4200000F92DDA /* LaunchScreen.storyboard in Resources */,
+				8468FB9423221D2900FC7A31 /* creditPositionCell.xib in Resources */,
 				849CD239230B1EEE0047F70F /* terms_developer.html in Resources */,
 				803EBC832302210B00CEC189 /* privacy.html in Resources */,
 				BDBF8ACA22F4200000F92DDA /* Assets.xcassets in Resources */,
@@ -603,6 +620,8 @@
 				BD0D4CB822F48077007DCCE5 /* SignUpVC.swift in Sources */,
 				803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */,
 				849CD251230C433D0047F70F /* DeveloperInBoxVC.swift in Sources */,
+				8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */,
+				8468FB8A23216D9900FC7A31 /* CreditPositionTableViewCell.swift in Sources */,
 				803EBC7F23021DA600CEC189 /* TermsVC.swift in Sources */,
 				84AAB4D92312FB8400EAC830 /* AddProjectStep7VC.swift in Sources */,
 				84AAB4CD2312FACD00EAC830 /* AddProjectStep1VC.swift in Sources */,
@@ -622,6 +641,7 @@
 				8440BD73231CEFC5003A4302 /* RoundShadowView.swift in Sources */,
 				BD0D4CB622F473C7007DCCE5 /* Utils.swift in Sources */,
 				84D8FF992315340000E9EED0 /* DeveloperProjectOverViewVC.swift in Sources */,
+				8468FB85231EDE9000FC7A31 /* CreditPositionVC.swift in Sources */,
 				849CD256230C8FAD0047F70F /* ImagePicker.swift in Sources */,
 				849CD250230C433D0047F70F /* DeveloperProfileVC.swift in Sources */,
 				849CD253230C433D0047F70F /* DeveloperSearchVC.swift in Sources */,

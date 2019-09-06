@@ -175,6 +175,11 @@ class FirebaseService {
                 self.userProjectsCount = prevProjectIDs.count
                 self.userProjectsResultCount = 0
                 
+                if self.userProjectsCount == 0 {
+                    completion([], nil)
+                    return
+                }
+                
                 for prevProjectID in prevProjectIDs {
                     self.db.collection("prev_projects").document(prevProjectID).getDocument(completion: { (prevDocument, prevError) in
                         self.userProjectsResultCount += 1
@@ -189,7 +194,6 @@ class FirebaseService {
                         }
                     })
                 }
-//                completion(result, nil)
             } else {
                 completion([], error)
             }

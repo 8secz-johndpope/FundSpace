@@ -15,6 +15,7 @@ target 'FundSpace' do
   pod 'DropDown'
   pod 'M13ProgressSuite'
   pod 'Charts'
+  pod 'ExpandableCell'
   
   pod 'Firebase/Core'
   pod 'Firebase/Auth'

@@ -454,7 +454,7 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
         if textField == projectBedroomsTextField {
             if let unit = textField.text, unit.count > 0 {
                 unitsView.isHidden = false
-                unitsLabel.text = "x"+textField.text
+                unitsLabel.text = "x"+textField.text!
             } else {
                 unitsView.isHidden = true
             }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Open Sans Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="creditPositionCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="114" id="NxX-a2-lil" customClass="CreditPositionTableViewCell" customModule="FundSpace" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="114"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NxX-a2-lil" id="CWv-0D-r8H">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="113.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cYq-kj-LAd">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="113.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bankruptcies or individual voluntary arrangements" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCb-6N-K1j">
+                                <rect key="frame" x="0.0" y="20" width="364" height="73.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                <color key="textColor" red="0.14117647059999999" green="0.1764705882" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="dCb-6N-K1j" secondAttribute="bottom" constant="20" id="7vj-Cx-M0b"/>
+                            <constraint firstItem="dCb-6N-K1j" firstAttribute="top" secondItem="cYq-kj-LAd" secondAttribute="top" constant="20" id="F6T-jd-fxv"/>
+                            <constraint firstItem="dCb-6N-K1j" firstAttribute="leading" secondItem="cYq-kj-LAd" secondAttribute="leading" id="VMB-If-L1C"/>
+                            <constraint firstAttribute="trailing" secondItem="dCb-6N-K1j" secondAttribute="trailing" constant="50" id="tFI-QG-unf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cYq-kj-LAd" firstAttribute="leading" secondItem="CWv-0D-r8H" secondAttribute="leading" id="3Si-gR-gc4"/>
+                    <constraint firstAttribute="bottom" secondItem="cYq-kj-LAd" secondAttribute="bottom" id="KSI-xz-8tH"/>
+                    <constraint firstItem="cYq-kj-LAd" firstAttribute="top" secondItem="CWv-0D-r8H" secondAttribute="top" id="RHi-q7-Ixy"/>
+                    <constraint firstAttribute="trailing" secondItem="cYq-kj-LAd" secondAttribute="trailing" id="hIF-dX-zue"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="headerDescriptionLabel" destination="dCb-6N-K1j" id="tSJ-qR-tSI"/>
+                <outlet property="headerView" destination="cYq-kj-LAd" id="bx4-hv-soS"/>
+            </connections>
+            <point key="canvasLocation" x="147.82608695652175" y="-61.607142857142854"/>
+        </tableViewCell>
+    </objects>
+</document>

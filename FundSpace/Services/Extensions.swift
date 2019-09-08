@@ -71,10 +71,25 @@ extension UITextField {
         self.leftView = paddingView
         self.leftViewMode = .always
     }
+    
     func setRightPaddingPoints(_ amount:CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
         self.rightView = paddingView
         self.rightViewMode = .always
+    }
+    
+    func setLeftIcon(_ icon: UIImage) {
+        
+        let padding = 15
+        let size = 20
+        
+        let outerView = UIView(frame: CGRect(x: 0, y: 0, width: size+padding, height: size) )
+        let iconView  = UIImageView(frame: CGRect(x: padding, y: 0, width: size, height: size))
+        iconView.image = icon
+        outerView.addSubview(iconView)
+        
+        leftView = outerView
+        leftViewMode = .always
     }
 }
 

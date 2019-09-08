@@ -91,7 +91,7 @@ class GetStartedLeaderVC: UIViewController {
                 
                 UserDefaults.standard.set(self.userInfo, forKey: "userInfo")
                 let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderTabBarController") as! LeaderTabBarController
+                let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderTabVC") as! LeaderTabBarController
                 self.present(newViewController, animated: true, completion: nil)
             })
         }

@@ -23,6 +23,7 @@
 		8468FB922321AAE500FC7A31 /* expandedCreditPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */; };
 		8468FB9423221D2900FC7A31 /* creditPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8468FB9323221D2900FC7A31 /* creditPositionCell.xib */; };
 		8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */; };
+		8468FB982324709800FC7A31 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB972324709800FC7A31 /* ProjectTableViewCell.swift */; };
 		8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */; };
 		849CD236230B1E110047F70F /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD235230B1E100047F70F /* Firebase.swift */; };
 		849CD239230B1EEE0047F70F /* terms_developer.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD237230B1EED0047F70F /* terms_developer.html */; };
@@ -99,6 +100,7 @@
 		8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = expandedCreditPositionCell.xib; sourceTree = "<group>"; };
 		8468FB9323221D2900FC7A31 /* creditPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = creditPositionCell.xib; sourceTree = "<group>"; };
 		8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedCreditPositionTableViewCell.swift; sourceTree = "<group>"; };
+		8468FB972324709800FC7A31 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
 		8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMagneticProgress.swift; sourceTree = "<group>"; };
 		849CD235230B1E100047F70F /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		849CD237230B1EED0047F70F /* terms_developer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_developer.html; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				8468FB912321AAE500FC7A31 /* expandedCreditPositionCell.xib */,
 				8468FB9323221D2900FC7A31 /* creditPositionCell.xib */,
 				8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */,
+				8468FB972324709800FC7A31 /* ProjectTableViewCell.swift */,
 			);
 			path = Developer;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				BDBF8AC322F41FFF00F92DDA /* AppDelegate.swift in Sources */,
 				84AAB4CF2312FB0100EAC830 /* AddProjectStep2VC.swift in Sources */,
 				8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */,
+				8468FB982324709800FC7A31 /* ProjectTableViewCell.swift in Sources */,
 				84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */,
 				84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */,
 				84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */,

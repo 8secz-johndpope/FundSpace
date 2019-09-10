@@ -109,6 +109,7 @@ class LeaderProjectOverViewVC: UIViewController {
     var projectID: String = ""
     var projectInfo: [String: Any] = [:]
     var userInfo: [String: Any] = [:]
+    var userId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,6 +117,7 @@ class LeaderProjectOverViewVC: UIViewController {
         // Do any additional setup after loading the view.
         initUI()
         loadProjectInfo()
+        initGesture()
     }
     
     func initUI() {
@@ -185,7 +187,9 @@ class LeaderProjectOverViewVC: UIViewController {
                 return
             }
             
-            FirebaseService.sharedInstance.getUserInfo(id: (data["userID"] as! String), completion: { (userInfo, error) in
+            self.userId = data["userID"] as! String
+            
+            FirebaseService.sharedInstance.getUserInfo(id: self.userId, completion: { (userInfo, error) in
                 if let error = error {
                     SVProgressHUD.dismiss()
                     let errorMsg = error.localizedDescription
@@ -217,6 +221,19 @@ class LeaderProjectOverViewVC: UIViewController {
                 self.applyDataToUI()
             })
         }
+    }
+    
+    func initGesture() {
+        let developerProfileGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTapOnDeveloperProfile))
+        developerInfoView.addGestureRecognizer(developerProfileGesture)
+    }
+    
+    @objc func handleTapOnDeveloperProfile() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderDeveloperProfileVC") as! LeaderDeveloperProfileVC
+        newViewController.userInfo = userInfo
+        newViewController.userID = userId
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func applyDataToUI() {

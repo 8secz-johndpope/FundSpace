@@ -1,8 +1,8 @@
 //
-//  DeveloperProfileVC.swift
+//  LeaderDeveloperProfileVC.swift
 //  FundSpace
 //
-//  Created by admin on 8/20/19.
+//  Created by admin on 9/11/19.
 //  Copyright © 2019 Zhang Hui. All rights reserved.
 //
 
@@ -11,9 +11,7 @@ import M13ProgressSuite
 import Charts
 import SVProgressHUD
 
-class DeveloperProfileVC: UIViewController {
-    @IBOutlet weak var rightNavigationBarBtn: UIBarButtonItem!
-    @IBOutlet weak var leftNavigationBarBtn: UIBarButtonItem!
+class LeaderDeveloperProfileVC: UIViewController {
     
     @IBOutlet weak var basicInfoView: UIView!
     @IBOutlet weak var profileImageBtn: UIButton!
@@ -22,7 +20,8 @@ class DeveloperProfileVC: UIViewController {
     @IBOutlet weak var companyLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
-    @IBOutlet weak var addProjectBtn: UIButton!
+    @IBOutlet weak var messageBtn: UIButton!
+    @IBOutlet weak var currentProjectsBtn: UIButton!
     
     @IBOutlet weak var developerInfoView: UIView!
     @IBOutlet weak var experienceView: UIView!
@@ -69,9 +68,7 @@ class DeveloperProfileVC: UIViewController {
     @IBOutlet weak var projectCompleteDateTextField: UITextField!
     @IBOutlet weak var projectProfitView: UIView!
     @IBOutlet weak var projectProfitTextField: UITextField!
-    @IBOutlet weak var projectLenderView: UIView!
     @IBOutlet weak var projectLenderTextField: UITextField!
-    @IBOutlet weak var projectSaveBtn: UIButton!
     
     @IBOutlet weak var creditPositionView: UIView!
     @IBOutlet weak var creditPositionProgressBar: M13ProgressViewBar!
@@ -80,32 +77,23 @@ class DeveloperProfileVC: UIViewController {
     @IBOutlet weak var assetsChatView: BarChartView!
     
     @IBOutlet weak var uploadDocumentBtn: UIButton!
-    @IBOutlet weak var logoutBtn: UIButton!
     
-    var isSave: Bool = false
-    var imagePicker: ImagePicker!
     var userInfo: [String: Any] = [:]
     var prevProjects: Array<[String: Any]> = []
     var selectedIndex: Int = 0
-    var isNewPrevProject: Bool = false
+    var userID: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         initUI()
-        initGesture()
         makeEditable(false)
         fetchInitData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-    }
-    
-    func initGesture() {
-        let creditPositionGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTapOnCreditPosition))
-        creditPositionView.addGestureRecognizer(creditPositionGesture)
     }
     
     func initUI() {
@@ -115,7 +103,10 @@ class DeveloperProfileVC: UIViewController {
         profileImageView.layer.cornerRadius = profileImageView.bounds.width / 2
         profileImageBtn.setImage(UIImage(named: "circle_border.png"), for: .normal)
         
-        addProjectBtn.layer.cornerRadius = 4
+        messageBtn.layer.cornerRadius = 4
+        currentProjectsBtn.layer.cornerRadius = 4
+        currentProjectsBtn.layer.borderColor = UIColor(red: 0.57, green: 0.57, blue: 0.57, alpha: 1).cgColor
+        currentProjectsBtn.layer.borderWidth = 1
         
         developerInfoView.makeRoundShadowView()
         experienceView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
@@ -154,8 +145,6 @@ class DeveloperProfileVC: UIViewController {
         projectSaleView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
         projectCompleteDateView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
         projectProfitView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
-        projectLenderView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
-        projectSaveBtn.layer.cornerRadius = 4
         
         creditPositionView.makeRoundShadowView()
         creditPositionProgressBar.setProgress(0.75, animated: true)
@@ -164,19 +153,6 @@ class DeveloperProfileVC: UIViewController {
         assetsView.makeRoundShadowView()
         
         uploadDocumentBtn.layer.cornerRadius = 4
-        
-        logoutBtn.layer.borderColor = UIColor(red: 0, green: 0.49, blue: 1, alpha: 1).cgColor
-        logoutBtn.layer.borderWidth = 1
-        logoutBtn.layer.cornerRadius = 4
-        
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
-        
-    }
-    
-    @objc func handleTapOnCreditPosition() {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "creditPositionVC") as! CreditPositionVC
-        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func makeEditable(_ flag: Bool) {
@@ -206,7 +182,6 @@ class DeveloperProfileVC: UIViewController {
         projectCompleteDateTextField.isEnabled = flag
         projectProfitTextField.isEnabled = flag
         projectLenderTextField.isEnabled = flag
-        projectSaveBtn.isEnabled = flag
     }
     
     func getOptionArray() -> Array<String> {
@@ -215,35 +190,20 @@ class DeveloperProfileVC: UIViewController {
             options.append(prevProject["name"] as! String)
         }
         
-        options.append("Add new previous project")
         return options
     }
     
     func configureProjectView(index: Int) {
-        if index == getOptionArray().count - 1 {
-            projectNameTextField.text = ""
-            projectAddressTextField.text = ""
-            projectPurchaseTextField.text = ""
-            projectBuildTextField.text = ""
-            projectSaleTextField.text = ""
-            projectCompleteDateTextField.text = ""
-            projectProfitTextField.text = ""
-            projectLenderTextField.text = ""
+        let prevProject = prevProjects[index]
+        projectNameTextField.text = prevProject["name"] as? String ?? ""
+        projectAddressTextField.text = prevProject["address"] as? String ?? ""
+        projectPurchaseTextField.text = prevProject["purchase"] as? String ?? ""
+        projectBuildTextField.text = prevProject["build"] as? String ?? ""
+        projectSaleTextField.text = prevProject["sale"] as? String ?? ""
+        projectCompleteDateTextField.text = prevProject["complete"] as? String ?? ""
+        projectProfitTextField.text = prevProject["profit"] as? String ?? ""
+        projectLenderTextField.text = prevProject["lender"] as? String ?? ""
             
-            isNewPrevProject = true
-        } else {
-            let prevProject = prevProjects[index]
-            projectNameTextField.text = prevProject["name"] as? String ?? ""
-            projectAddressTextField.text = prevProject["address"] as? String ?? ""
-            projectPurchaseTextField.text = prevProject["purchase"] as? String ?? ""
-            projectBuildTextField.text = prevProject["build"] as? String ?? ""
-            projectSaleTextField.text = prevProject["sale"] as? String ?? ""
-            projectCompleteDateTextField.text = prevProject["complete"] as? String ?? ""
-            projectProfitTextField.text = prevProject["profit"] as? String ?? ""
-            projectLenderTextField.text = prevProject["lender"] as? String ?? ""
-            
-            isNewPrevProject = false
-        }
     }
     
     func initDropDown() {
@@ -252,14 +212,16 @@ class DeveloperProfileVC: UIViewController {
         projectsDropDown.optionArray = optionArray
         
         // Select first element by default.
-        let selectedText = optionArray[0]
-        projectsDropDown.text = selectedText
-        projectsDropDown.select(selectedText)
-        configureProjectView(index: 0)
+        if (optionArray.count > 0) {
+            let selectedText = optionArray[0]
+            projectsDropDown.text = selectedText
+            projectsDropDown.select(selectedText)
+            configureProjectView(index: 0)
+        }
     }
     
     func fetchPrevProjects() {
-        FirebaseService.sharedInstance.fetchPreviousProjects(nil, completion: { (prevProjects, error) in
+        FirebaseService.sharedInstance.fetchPreviousProjects(userID, completion: { (prevProjects, error) in
             SVProgressHUD.dismiss()
             
             if let error = error {
@@ -274,7 +236,6 @@ class DeveloperProfileVC: UIViewController {
     }
     
     func fetchInitData() {
-        userInfo = UserDefaults.standard.value(forKey: "userInfo") as? [String: Any] ?? [:]
         
         let name: String = userInfo["name"] != nil ? userInfo["name"] as! String : "No Name"
         let companyName = userInfo["companyName"] != nil ? userInfo["companyName"] as! String : "No Company"
@@ -336,145 +297,14 @@ class DeveloperProfileVC: UIViewController {
         }
     }
     
-    func updateUserInfo() {
-        let profile_image = profileImageView.image ?? nil
-        let imageData = profile_image?.pngData() ?? nil
+    @IBAction func messageBtn_Click(_ sender: Any) {
         
-        let developerExperience: String = experienceTextField.text ?? ""
-        let birthDate: String = birthTextField.text ?? ""
-        let occupation: String = occupationTextField.text ?? ""
-        let employmentStatus: String = employmentStatusTextField.text ?? ""
-        let annualIncome: String = annualIncomeTextField.text ?? ""
-        let nationality: String = nationalityTextField.text ?? ""
-        let residentialStatus: String = residentialStatusTextField.text ?? ""
-        let residentialAddress: String = residentialAddressTextField.text ?? ""
-        let residentSince: String = residentSinceTextField.text ?? ""
-        
-        let companyName: String = companyNameTextField.text ?? ""
-        let countryIncorporation: String = countryIncorporationTextField.text ?? ""
-        let companyRegisterNumber: String = companyRegisterNumberTextField.text ?? ""
-        let companyRegisteredAddress: String = companyRegisteredAddressTextField.text ?? ""
-        let shareHolders: String = shareholdersTextField.text ?? ""
-        
-        userInfo["developerExperience"] = developerExperience
-        userInfo["birthDate"] = birthDate
-        userInfo["occupation"] = occupation
-        userInfo["employmentStatus"] = employmentStatus
-        userInfo["annualIncome"] = annualIncome
-        userInfo["nationality"] = nationality
-        userInfo["residentialStatus"] = residentialStatus
-        userInfo["residentialAddress"] = residentialAddress
-        userInfo["residentSince"] = residentSince
-        userInfo["companyName"] = companyName
-        userInfo["countryIncorporation"] = countryIncorporation
-        userInfo["companyRegisterNumber"] = companyRegisterNumber
-        userInfo["companyRegisteredAddress"] = companyRegisteredAddress
-        userInfo["shareHolders"] = shareHolders
-        
-        
-        SVProgressHUD.show()
-        FirebaseService.sharedInstance.uploadImage(imageData: imageData) { (result, error) in
-            if (error != nil) {
-                SVProgressHUD.dismiss()
-                let errorMessage: String = error?.localizedDescription ?? ""
-                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
-                return
-            }
-            
-            FirebaseService.sharedInstance.storeUserInfo(id: result!, userInfo: self.userInfo, completion: { (error) in
-                SVProgressHUD.dismiss()
-                if (error != nil) {
-                    let errorMessage: String = error?.localizedDescription ?? ""
-                    Utils.sharedInstance.showError(title: "Error", message: errorMessage)
-                    return
-                }
-                
-                self.rightNavigationBarBtn.title = "Edit"
-                self.profileImageBtn.setImage(UIImage(named: "circle_border.png"), for: .normal)
-                
-                self.makeEditable(false)
-            })
-        }
     }
     
-    @IBAction func rightNavigationBarBtn_Click(_ sender: Any) {
-        if (isSave) {
-            updateUserInfo()
-        } else {
-            makeEditable(true)
-            profileImageBtn.setImage(UIImage(named: "avatar_border.png"), for: .normal)
-            rightNavigationBarBtn.title = "Save"
-        }
-        isSave = !isSave
-    }
-    
-    @IBAction func leftNavigationBarBtn_Click(_ sender: Any) {
-    }
-    
-    @IBAction func profileImageBtn_Click(_ sender: UIButton) {
-        self.imagePicker.present(from: sender)
-    }
-    
-    @IBAction func addProjectBtn_Click(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "addProjectVC") as! AddProjectVC
-        self.navigationController?.pushViewController(newViewController, animated: true)
+    @IBAction func currentProjectBtn_Click(_ sender: Any) {
     }
     
     @IBAction func uploadDocumentBtn_Click(_ sender: Any) {
     }
-    
-    @IBAction func savePrevProjectBtn_Click(_ sender: Any) {
-        let projectName: String = projectNameTextField.text ?? ""
-        let projectAddress: String = projectAddressTextField.text ?? ""
-        let projectPurchase: String = projectPurchaseTextField.text ?? ""
-        let projectBuild: String = projectBuildTextField.text ?? ""
-        let projectSale: String = projectSaleTextField.text ?? ""
-        let projectDate: String = projectCompleteDateTextField.text ?? ""
-        let projectProfit: String = projectProfitTextField.text ?? ""
-        let projectLender: String = projectLenderTextField.text ?? ""
-        
-        
-        var prevProjectInfo: [String: Any] = [:]
-        prevProjectInfo["name"] = projectName
-        prevProjectInfo["address"] = projectAddress
-        prevProjectInfo["purchase"] = projectPurchase
-        prevProjectInfo["build"] = projectBuild
-        prevProjectInfo["sale"] = projectSale
-        prevProjectInfo["complete"] = projectDate
-        prevProjectInfo["profit"] = projectProfit
-        prevProjectInfo["lender"] = projectLender
-        
-        if !isNewPrevProject {
-            prevProjectInfo["id"] = prevProjects[selectedIndex]["id"]
-        }
-        
-        SVProgressHUD.show()
-        FirebaseService.sharedInstance.updatePreviousProject(prevProject: prevProjectInfo) { (error) in
-            if let error = error {
-                SVProgressHUD.dismiss()
-                let errorMessage: String = error.localizedDescription
-                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
-                return
-            }
-            
-            self.fetchPrevProjects()
-        }
-    }
-    
-    @IBAction func logoutBtn_Click(_ sender: Any) {
-        UserDefaults.standard.set(nil, forKey: "userInfo")
-        
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "loginVC") as! LogInVC
-        self.present(newViewController, animated: true, completion: nil)
-    }
-    
-}
 
-extension DeveloperProfileVC: ImagePickerDelegate {
-    
-    func didSelect(image: UIImage?) {
-        self.profileImageView.image = image
-    }
 }

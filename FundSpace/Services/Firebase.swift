@@ -165,9 +165,13 @@ class FirebaseService {
     }
     
     // Fetch previous projects for developer
-    func fetchPreviousProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
-        let user_id: String = Auth.auth().currentUser!.uid
-        db.collection("users").document(user_id).getDocument(completion: { (document, error) in
+    func fetchPreviousProjects(_ id: String?, completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        var user_id: String? = id
+        if user_id == nil || user_id == "" {
+            user_id = Auth.auth().currentUser!.uid
+        }
+        
+        db.collection("users").document(user_id!).getDocument(completion: { (document, error) in
             if let document = document, document.exists {
                 var result: Array<[String: Any]> = []
                 let prevProjectIDs: Array<String> = document.get("prevProjectIDs") as? Array<String> ?? []

@@ -81,7 +81,7 @@ extension UITextField {
     func setLeftIcon(_ icon: UIImage) {
         
         let padding = 15
-        let size = 20
+        let size = 18
         
         let outerView = UIView(frame: CGRect(x: 0, y: 0, width: size+padding, height: size) )
         let iconView  = UIImageView(frame: CGRect(x: padding, y: 0, width: size, height: size))

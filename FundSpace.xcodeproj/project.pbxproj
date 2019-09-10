@@ -25,6 +25,8 @@
 		8468FB9423221D2900FC7A31 /* creditPositionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8468FB9323221D2900FC7A31 /* creditPositionCell.xib */; };
 		8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */; };
 		8468FB982324709800FC7A31 /* ProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8468FB972324709800FC7A31 /* ProjectTableViewCell.swift */; };
+		8477535623264BB20009A7DD /* LeaderProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8477535523264BB20009A7DD /* LeaderProjectTableViewCell.swift */; };
+		84775358232650CF0009A7DD /* LeaderProjectOverViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84775357232650CF0009A7DD /* LeaderProjectOverViewVC.swift */; };
 		8489E4FA2316701F00DC82B8 /* MKMagneticProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */; };
 		849CD236230B1E110047F70F /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CD235230B1E100047F70F /* Firebase.swift */; };
 		849CD239230B1EEE0047F70F /* terms_developer.html in Resources */ = {isa = PBXBuildFile; fileRef = 849CD237230B1EED0047F70F /* terms_developer.html */; };
@@ -103,6 +105,8 @@
 		8468FB9323221D2900FC7A31 /* creditPositionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = creditPositionCell.xib; sourceTree = "<group>"; };
 		8468FB952322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandedCreditPositionTableViewCell.swift; sourceTree = "<group>"; };
 		8468FB972324709800FC7A31 /* ProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTableViewCell.swift; sourceTree = "<group>"; };
+		8477535523264BB20009A7DD /* LeaderProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderProjectTableViewCell.swift; sourceTree = "<group>"; };
+		84775357232650CF0009A7DD /* LeaderProjectOverViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderProjectOverViewVC.swift; sourceTree = "<group>"; };
 		8489E4F92316701F00DC82B8 /* MKMagneticProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMagneticProgress.swift; sourceTree = "<group>"; };
 		849CD235230B1E100047F70F /* Firebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		849CD237230B1EED0047F70F /* terms_developer.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = terms_developer.html; sourceTree = "<group>"; };
@@ -223,6 +227,8 @@
 				8414740C230D1D6D00A7C14F /* LeaderTabBarController.swift */,
 				84AAB4C72312AB4A00EAC830 /* LeaderProfileVC.swift */,
 				843CC68723259E4400038829 /* LeaderSearchVC.swift */,
+				8477535523264BB20009A7DD /* LeaderProjectTableViewCell.swift */,
+				84775357232650CF0009A7DD /* LeaderProjectOverViewVC.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */,
 				84AAB4D52312FB5800EAC830 /* AddProjectStep5VC.swift in Sources */,
 				BD0D4CB822F48077007DCCE5 /* SignUpVC.swift in Sources */,
+				84775358232650CF0009A7DD /* LeaderProjectOverViewVC.swift in Sources */,
 				803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */,
 				849CD251230C433D0047F70F /* DeveloperInBoxVC.swift in Sources */,
 				8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */,
@@ -639,6 +646,7 @@
 				8468FB982324709800FC7A31 /* ProjectTableViewCell.swift in Sources */,
 				84C37933230FCAE6003E02E0 /* iOSDropDown.swift in Sources */,
 				84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */,
+				8477535623264BB20009A7DD /* LeaderProjectTableViewCell.swift in Sources */,
 				84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */,
 				849CD24F230C433D0047F70F /* DeveloperTabBarController.swift in Sources */,
 				843CC68823259E4400038829 /* LeaderSearchVC.swift in Sources */,

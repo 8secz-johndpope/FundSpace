@@ -330,4 +330,35 @@ class FirebaseService {
             }
         }
     }
+    
+    func getAllProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        db.collection("projects").getDocuments { (snapshot, error) in
+            if let error = error {
+                completion([], error)
+            } else {
+                var result: Array<[String: Any]> = []
+                for document in snapshot!.documents {
+                    var data = document.data()
+                    data["id"] = document.documentID
+                    result.append(data)
+                }
+                completion(result, nil)
+            }
+        }
+    }
+    
+    func getUserInfo(id: String?, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        var user_id = id
+        if user_id == nil {
+            user_id = Auth.auth().currentUser?.uid
+        }
+        
+        db.collection("users").document(user_id!).getDocument { (snapshot, error) in
+            if let document = snapshot, document.exists {
+                completion(document.data(), nil)
+            } else {
+                completion([:], error)
+            }
+        }
+    }
 }

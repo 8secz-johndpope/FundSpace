@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import SVProgressHUD
 
 class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -27,6 +29,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var projectsTableView: UITableView!
     
     var projects: Array<[String: Any]> = []
+    let currentUserID: String = Auth.auth().currentUser!.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +37,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view.
         
         initUI()
+        loadData()
     }
     
     func initUI() {
@@ -52,6 +56,28 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         resetBtn.layer.cornerRadius = 4
         resetBtn.layer.borderWidth = 1
         resetBtn.layer.borderColor = UIColor(red: 0.57, green: 0.57, blue: 0.57, alpha: 1).cgColor
+    }
+    
+    func loadData() {
+        SVProgressHUD.show()
+        FirebaseService.sharedInstance.getAllProjects { (projects, error) in
+            SVProgressHUD.dismiss()
+            if let error = error {
+                let errorMessage = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+                return
+            }
+            
+            self.projects = projects!
+            self.projectsTableView.reloadData()
+        }
+    }
+    
+    func wasBookMarked(user_list: Array<String>?) -> Bool {
+        if user_list == nil {
+            return false
+        }
+        return user_list!.contains(currentUserID)
     }
     
     @IBAction func advancedFilterBtn_Click(_ sender: Any) {
@@ -74,7 +100,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "projectTableViewCell", for: indexPath) as! ProjectTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "leaderProjectTableViewCell", for: indexPath) as! LeaderProjectTableViewCell
         
         let data: [String: Any] = projects[indexPath.row]
         cell.projectCostLabel.text = data["contribute"] as? String
@@ -97,6 +123,11 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.projectBedroomsLabel.text = "x"+String(units)
         }
         
+        if (wasBookMarked(user_list: data["bookmark"] as? Array<String>)) {
+            cell.bookmarkBtn.setImage(UIImage(named: "bookmark"), for: .normal)
+        } else {
+            cell.bookmarkBtn.setImage(UIImage(named: "default_bookmark"), for: .normal)
+        }
         
         return cell
     }
@@ -108,7 +139,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data: [String: Any] = projects[indexPath.row]
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerProjectOverViewVC") as! DeveloperProjectOverViewVC
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderProjectOverViewVC") as! LeaderProjectOverViewVC
         newViewController.projectID = data["id"] as! String
         self.navigationController?.pushViewController(newViewController, animated: true)
     }

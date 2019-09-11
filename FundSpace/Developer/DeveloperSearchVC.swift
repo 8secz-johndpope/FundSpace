@@ -72,6 +72,7 @@ class DeveloperSearchVC: UIViewController, UITableViewDelegate, UITableViewDataS
             cell.projectBedroomsLabel.text = "x"+String(units)
         }
         
+        cell.selectionStyle = .none
         
         return cell
     }

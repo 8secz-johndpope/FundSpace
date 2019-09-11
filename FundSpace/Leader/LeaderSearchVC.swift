@@ -80,6 +80,37 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return user_list!.contains(currentUserID)
     }
     
+    @objc func bookmarkBtnClick(sender: UIButton) {
+        let tag = sender.tag
+        let data = projects[tag]
+        var bookmarks: Array<String> = data["bookmark"] as? Array<String> ?? []
+        let currentUserID: String = Auth.auth().currentUser!.uid
+        if (wasBookMarked(user_list: data["bookmark"] as? Array<String>)) {
+            let index = bookmarks.firstIndex(of: currentUserID)
+            bookmarks.remove(at: index!)
+//            cell.bookmarkBtn.setImage(UIImage(named: "bookmark"), for: .normal)
+        } else {
+//            cell.bookmarkBtn.setImage(UIImage(named: "default_bookmark"), for: .normal)
+            bookmarks.append(currentUserID)
+        }
+        
+        FirebaseService.sharedInstance.updateProject(id: data["id"] as! String, projectInfo: ["bookmark": bookmarks]) { (error) in
+            if let error = error {
+                let errorMessage = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+                return
+            }
+            
+            if (self.wasBookMarked(user_list: data["bookmark"] as? Array<String>)) {
+                sender.setImage(UIImage(named: "default_bookmark"), for: .normal)
+            } else {
+                sender.setImage(UIImage(named: "bookmark"), for: .normal)
+            }
+            
+            self.projects[tag]["bookmark"] = bookmarks
+        }
+    }
+    
     @IBAction func advancedFilterBtn_Click(_ sender: Any) {
     }
     
@@ -128,6 +159,10 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else {
             cell.bookmarkBtn.setImage(UIImage(named: "default_bookmark"), for: .normal)
         }
+        
+        cell.bookmarkBtn.addTarget(self, action: #selector(self.bookmarkBtnClick(sender:)), for: .touchUpInside)
+        
+        cell.selectionStyle = .none
         
         return cell
     }

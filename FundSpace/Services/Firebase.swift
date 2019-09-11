@@ -365,4 +365,21 @@ class FirebaseService {
             }
         }
     }
+    
+    func getBookmarkProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        let user_id: String = Auth.auth().currentUser!.uid
+        db.collection("projects").whereField("bookmark", arrayContains: user_id).getDocuments { (snapshot, error) in
+            if let snapshot = snapshot {
+                var result: Array<Any> = []
+                for document in snapshot.documents {
+                    var data = document.data()
+                    data["id"] = document.documentID
+                    result.append(data)
+                }
+                completion((result as! Array<[String : Any]>), nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
 }

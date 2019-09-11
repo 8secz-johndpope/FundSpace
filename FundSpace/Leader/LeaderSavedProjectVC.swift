@@ -1,29 +1,34 @@
 //
-//  DeveloperSearchVC.swift
+//  LeaderSavedProjectVC.swift
 //  FundSpace
 //
-//  Created by admin on 8/20/19.
+//  Created by admin on 9/12/19.
 //  Copyright © 2019 Zhang Hui. All rights reserved.
 //
 
 import UIKit
 import SVProgressHUD
 
-class DeveloperSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class LeaderSavedProjectVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var projectsTableView: UITableView!
     var projects: Array<[String: Any]> = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         loadData()
     }
     
     func loadData() {
         SVProgressHUD.show()
-        FirebaseService.sharedInstance.getProjectsByCurrentUser { (projects, error) in
+        FirebaseService.sharedInstance.getBookmarkProjects { (projects, error) in
             SVProgressHUD.dismiss()
             if let error = error {
                 let errMsg = error.localizedDescription
@@ -82,7 +87,7 @@ class DeveloperSearchVC: UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data: [String: Any] = projects[indexPath.row]
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "developerProjectOverViewVC") as! DeveloperProjectOverViewVC
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "leaderProjectOverViewVC") as! LeaderProjectOverViewVC
         newViewController.projectID = data["id"] as! String
         self.navigationController?.pushViewController(newViewController, animated: true)
     }

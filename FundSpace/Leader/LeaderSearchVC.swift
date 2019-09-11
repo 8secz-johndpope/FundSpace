@@ -88,9 +88,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if (wasBookMarked(user_list: data["bookmark"] as? Array<String>)) {
             let index = bookmarks.firstIndex(of: currentUserID)
             bookmarks.remove(at: index!)
-//            cell.bookmarkBtn.setImage(UIImage(named: "bookmark"), for: .normal)
         } else {
-//            cell.bookmarkBtn.setImage(UIImage(named: "default_bookmark"), for: .normal)
             bookmarks.append(currentUserID)
         }
         

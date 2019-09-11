@@ -54,6 +54,7 @@
 		84D8FF992315340000E9EED0 /* DeveloperProjectOverViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */; };
 		84E3E17F232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */; };
 		84E3E1812328ED3C00F4D6E5 /* SendTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */; };
+		84E3E183232957FA00F4D6E5 /* LeaderSavedProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -136,6 +137,7 @@
 		84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProjectOverViewVC.swift; sourceTree = "<group>"; };
 		84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderDeveloperProfileVC.swift; sourceTree = "<group>"; };
 		84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTermsVC.swift; sourceTree = "<group>"; };
+		84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderSavedProjectVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				84775357232650CF0009A7DD /* LeaderProjectOverViewVC.swift */,
 				84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */,
 				84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */,
+				84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				8468FB8A23216D9900FC7A31 /* CreditPositionTableViewCell.swift in Sources */,
 				803EBC7F23021DA600CEC189 /* TermsVC.swift in Sources */,
 				84AAB4D92312FB8400EAC830 /* AddProjectStep7VC.swift in Sources */,
+				84E3E183232957FA00F4D6E5 /* LeaderSavedProjectVC.swift in Sources */,
 				84AAB4CD2312FACD00EAC830 /* AddProjectStep1VC.swift in Sources */,
 				BDBF8AC522F41FFF00F92DDA /* LogInVC.swift in Sources */,
 				849CD236230B1E110047F70F /* Firebase.swift in Sources */,

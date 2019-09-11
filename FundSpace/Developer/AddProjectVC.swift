@@ -187,6 +187,11 @@ class AddProjectVC: UIViewController {
         projectInfo["strategy"] = strategy
         projectInfo["contribute"] = contribute
         
+        let length = 6
+        let characters = "0123456789"
+        let randomCharacters = (0..<length).map{_ in characters.randomElement()!}
+        projectInfo["reference"] = "PR" + String(randomCharacters)
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         

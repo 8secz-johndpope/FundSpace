@@ -53,6 +53,7 @@
 		84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8FF962313E15900E9EED0 /* Checkbox.swift */; };
 		84D8FF992315340000E9EED0 /* DeveloperProjectOverViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */; };
 		84E3E17F232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */; };
+		84E3E1812328ED3C00F4D6E5 /* SendTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -134,6 +135,7 @@
 		84D8FF962313E15900E9EED0 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		84D8FF982315340000E9EED0 /* DeveloperProjectOverViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperProjectOverViewVC.swift; sourceTree = "<group>"; };
 		84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderDeveloperProfileVC.swift; sourceTree = "<group>"; };
+		84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTermsVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				8477535523264BB20009A7DD /* LeaderProjectTableViewCell.swift */,
 				84775357232650CF0009A7DD /* LeaderProjectOverViewVC.swift */,
 				84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */,
+				84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -634,6 +637,7 @@
 				84AAB4D52312FB5800EAC830 /* AddProjectStep5VC.swift in Sources */,
 				BD0D4CB822F48077007DCCE5 /* SignUpVC.swift in Sources */,
 				84775358232650CF0009A7DD /* LeaderProjectOverViewVC.swift in Sources */,
+				84E3E1812328ED3C00F4D6E5 /* SendTermsVC.swift in Sources */,
 				803EBC8A230230C000CEC189 /* ForgotVC.swift in Sources */,
 				849CD251230C433D0047F70F /* DeveloperInBoxVC.swift in Sources */,
 				8468FB962322231B00FC7A31 /* ExpandedCreditPositionTableViewCell.swift in Sources */,

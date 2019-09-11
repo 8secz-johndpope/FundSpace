@@ -197,7 +197,7 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
         projectTitleLabel.text = projectInfo["title"] as? String ?? ""
         projectAddressLabel.text = projectInfo["street"] as? String ?? ""
         
-        let units: Int = projectInfo["units"] as? Int ?? 0
+        let units: Int = Int(projectInfo["units"] as! String) ?? 0
         
         if units == 0 {
             unitsView.isHidden = true

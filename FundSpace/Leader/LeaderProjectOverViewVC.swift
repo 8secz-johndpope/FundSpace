@@ -246,7 +246,7 @@ class LeaderProjectOverViewVC: UIViewController {
         projectTitleLabel.text = projectInfo["title"] as? String ?? ""
         projectAddressLabel.text = projectInfo["street"] as? String ?? ""
         
-        let units: Int = projectInfo["units"] as? Int ?? 0
+        let units: Int = Int(projectInfo["units"] as! String) ?? 0
         
         if units == 0 {
             unitsView.isHidden = true
@@ -386,5 +386,10 @@ class LeaderProjectOverViewVC: UIViewController {
     }
     
     @IBAction func sendTermsBtn_Click(_ sender: Any) {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "sendTermsVC") as! SendTermsVC
+        newViewController.projectInfo = projectInfo
+        newViewController.userId = userId
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
 }

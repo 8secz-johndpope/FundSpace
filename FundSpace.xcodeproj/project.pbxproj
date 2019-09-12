@@ -55,6 +55,7 @@
 		84E3E17F232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */; };
 		84E3E1812328ED3C00F4D6E5 /* SendTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */; };
 		84E3E183232957FA00F4D6E5 /* LeaderSavedProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */; };
+		84E3E185232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E184232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -138,6 +139,7 @@
 		84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderDeveloperProfileVC.swift; sourceTree = "<group>"; };
 		84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTermsVC.swift; sourceTree = "<group>"; };
 		84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderSavedProjectVC.swift; sourceTree = "<group>"; };
+		84E3E184232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderCurrentProjectsVC.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				84E3E17E232824CE00F4D6E5 /* LeaderDeveloperProfileVC.swift */,
 				84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */,
 				84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */,
+				84E3E184232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				849CD254230C433D0047F70F /* GetStartedDeveloperVC.swift in Sources */,
 				803EBC7D2302125E00CEC189 /* Extensions.swift in Sources */,
 				84AAB4D32312FB4800EAC830 /* AddProjectStep4VC.swift in Sources */,
+				84E3E185232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift in Sources */,
 				84AAB4D72312FB7300EAC830 /* AddProjectStep6VC.swift in Sources */,
 				803EBC8823022DC400CEC189 /* PrivacyVC.swift in Sources */,
 				84AAB4D52312FB5800EAC830 /* AddProjectStep5VC.swift in Sources */,

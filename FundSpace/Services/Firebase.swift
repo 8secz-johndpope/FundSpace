@@ -318,9 +318,13 @@ class FirebaseService {
         }
     }
     
-    func getProjectsByCurrentUser(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
-        let user_id: String = Auth.auth().currentUser!.uid
-        db.collection("projects").whereField("userID", isEqualTo: user_id).getDocuments { (snapshot, error) in
+    func getProjectsByUserID(_ user_id: String, completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        var userID: String = user_id
+        if (userID == "") {
+            userID = Auth.auth().currentUser!.uid
+        }
+        
+        db.collection("projects").whereField("userID", isEqualTo: userID).getDocuments { (snapshot, error) in
             if let snapshot = snapshot {
                 var result: Array<Any> = []
                 for document in snapshot.documents {

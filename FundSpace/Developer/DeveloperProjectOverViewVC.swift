@@ -111,9 +111,9 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
     
     func initUI() {
         let borderColor = UIColor(red: 0.8, green: 0.8, blue: 0.8, alpha: 1)
-        projectTypeView.layer.cornerRadius = 3
-        projectTypeView.layer.borderColor = UIColor(red: 0.14, green: 0.18, blue: 0.23, alpha: 1).cgColor
-        projectTypeView.layer.borderWidth = 1
+        projectTypeView.clipsToBounds = true
+        projectTypeView.layer.cornerRadius = 10
+        projectTypeView.layer.maskedCorners = [.layerMinXMaxYCorner]
         
         projectBasicInfoContainerView.addBottomBorder(color: borderColor, margins: 0, borderLineSize: 0.5)
         projectBasicInfoView.makeRoundShadowView(cornerRadius: 5, shadowRadius: 14)

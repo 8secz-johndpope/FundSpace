@@ -56,6 +56,10 @@
 		84E3E1812328ED3C00F4D6E5 /* SendTermsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */; };
 		84E3E183232957FA00F4D6E5 /* LeaderSavedProjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */; };
 		84E3E185232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E184232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift */; };
+		84E3E18E232B6B4300F4D6E5 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E18D232B6B4300F4D6E5 /* ChatVC.swift */; };
+		84E3E190232B8A5600F4D6E5 /* ChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E18F232B8A5600F4D6E5 /* ChatInputView.swift */; };
+		84E3E198232C426E00F4D6E5 /* ChatViewNavigationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E3E197232C426E00F4D6E5 /* ChatViewNavigationCell.xib */; };
+		84E3E19C232C45E000F4D6E5 /* ChatViewNavigationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3E19B232C45E000F4D6E5 /* ChatViewNavigationCell.swift */; };
 		BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAE22F46F17007DCCE5 /* Open Sans Bold Italic.ttf */; };
 		BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAF22F46F17007DCCE5 /* Open Sans Bold.ttf */; };
 		BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */; };
@@ -140,6 +144,10 @@
 		84E3E1802328ED3C00F4D6E5 /* SendTermsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTermsVC.swift; sourceTree = "<group>"; };
 		84E3E182232957FA00F4D6E5 /* LeaderSavedProjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderSavedProjectVC.swift; sourceTree = "<group>"; };
 		84E3E184232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderCurrentProjectsVC.swift; sourceTree = "<group>"; };
+		84E3E18D232B6B4300F4D6E5 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		84E3E18F232B8A5600F4D6E5 /* ChatInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputView.swift; sourceTree = "<group>"; };
+		84E3E197232C426E00F4D6E5 /* ChatViewNavigationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewNavigationCell.xib; sourceTree = "<group>"; };
+		84E3E19B232C45E000F4D6E5 /* ChatViewNavigationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewNavigationCell.swift; sourceTree = "<group>"; };
 		B4393393F59E6DD3FD1E9FD7 /* Pods-FundSpace.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FundSpace.release.xcconfig"; path = "Target Support Files/Pods-FundSpace/Pods-FundSpace.release.xcconfig"; sourceTree = "<group>"; };
 		BD0D4CAC22F46F17007DCCE5 /* Open Sans Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Italic.ttf"; sourceTree = "<group>"; };
 		BD0D4CAD22F46F17007DCCE5 /* Open Sans Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Open Sans Regular.ttf"; sourceTree = "<group>"; };
@@ -267,6 +275,9 @@
 				803EBC7E23021DA600CEC189 /* TermsVC.swift */,
 				803EBC8723022DC400CEC189 /* PrivacyVC.swift */,
 				803EBC89230230C000CEC189 /* ForgotVC.swift */,
+				84E3E18D232B6B4300F4D6E5 /* ChatVC.swift */,
+				84E3E197232C426E00F4D6E5 /* ChatViewNavigationCell.xib */,
+				84E3E19B232C45E000F4D6E5 /* ChatViewNavigationCell.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -302,6 +313,7 @@
 				84C37932230FCAE6003E02E0 /* iOSDropDown.swift */,
 				84D8FF962313E15900E9EED0 /* Checkbox.swift */,
 				8440BD72231CEFC5003A4302 /* RoundShadowView.swift */,
+				84E3E18F232B8A5600F4D6E5 /* ChatInputView.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -499,6 +511,7 @@
 				BD0D4CB022F46F9E007DCCE5 /* Open Sans Bold Italic.ttf in Resources */,
 				BD0D4CB122F46F9E007DCCE5 /* Open Sans Bold.ttf in Resources */,
 				BD0D4CB222F46F9E007DCCE5 /* Open Sans Italic.ttf in Resources */,
+				84E3E198232C426E00F4D6E5 /* ChatViewNavigationCell.xib in Resources */,
 				BD0D4CB322F46F9E007DCCE5 /* Open Sans Regular.ttf in Resources */,
 				BDBF8ACD22F4200000F92DDA /* LaunchScreen.storyboard in Resources */,
 				8468FB9423221D2900FC7A31 /* creditPositionCell.xib in Resources */,
@@ -636,6 +649,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				849CD254230C433D0047F70F /* GetStartedDeveloperVC.swift in Sources */,
+				84E3E190232B8A5600F4D6E5 /* ChatInputView.swift in Sources */,
+				84E3E19C232C45E000F4D6E5 /* ChatViewNavigationCell.swift in Sources */,
 				803EBC7D2302125E00CEC189 /* Extensions.swift in Sources */,
 				84AAB4D32312FB4800EAC830 /* AddProjectStep4VC.swift in Sources */,
 				84E3E185232AE25D00F4D6E5 /* LeaderCurrentProjectsVC.swift in Sources */,
@@ -663,6 +678,7 @@
 				84AAB4C82312AB4A00EAC830 /* LeaderProfileVC.swift in Sources */,
 				8477535623264BB20009A7DD /* LeaderProjectTableViewCell.swift in Sources */,
 				84D8FF972313E15900E9EED0 /* Checkbox.swift in Sources */,
+				84E3E18E232B6B4300F4D6E5 /* ChatVC.swift in Sources */,
 				849CD24F230C433D0047F70F /* DeveloperTabBarController.swift in Sources */,
 				843CC68823259E4400038829 /* LeaderSearchVC.swift in Sources */,
 				849CD259230CA2600047F70F /* GetStartedLeaderVC.swift in Sources */,

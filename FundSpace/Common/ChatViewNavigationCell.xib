@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Open Sans Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="chatViewNavigationCell" id="ZY3-sK-Nva" customClass="ChatViewNavigationCell" customModule="FundSpace" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="125" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCy-mU-GIG">
+                    <rect key="frame" x="0.0" y="0.0" width="125" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bif-pg-bRC">
+                            <rect key="frame" x="0.0" y="6" width="32" height="32"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="FnN-I2-y3m">
+                                    <rect key="frame" x="3" y="3" width="26" height="26"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="26" id="Qq1-kY-QRk"/>
+                                        <constraint firstAttribute="height" constant="26" id="TsF-4y-rJB"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="HbB-UQ-Njz"/>
+                                <constraint firstItem="FnN-I2-y3m" firstAttribute="centerX" secondItem="bif-pg-bRC" secondAttribute="centerX" id="LnH-Zw-8Xs"/>
+                                <constraint firstItem="FnN-I2-y3m" firstAttribute="centerY" secondItem="bif-pg-bRC" secondAttribute="centerY" id="akP-it-nvv"/>
+                                <constraint firstAttribute="width" constant="32" id="w5S-Jc-9Yb"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZcT-vx-HF4">
+                            <rect key="frame" x="20" y="26" width="12" height="12"/>
+                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="12" id="ej2-Qk-XA2"/>
+                                <constraint firstAttribute="width" constant="12" id="jT4-kp-MM8"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Richard Smith" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XCc-CB-ghR">
+                            <rect key="frame" x="40" y="9" width="78" height="16.5"/>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                            <color key="textColor" red="0.14117647059999999" green="0.1764705882" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ACTIVE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0CN-Zg-H0g">
+                            <rect key="frame" x="40" y="23.5" width="26" height="11"/>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="8"/>
+                            <color key="textColor" red="0.14117647059999999" green="0.1764705882" blue="0.2274509804" alpha="0.59859154930000003" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="XCc-CB-ghR" firstAttribute="leading" secondItem="bif-pg-bRC" secondAttribute="trailing" constant="8" id="BGf-ca-Ryd"/>
+                        <constraint firstItem="bif-pg-bRC" firstAttribute="leading" secondItem="WCy-mU-GIG" secondAttribute="leading" id="Cfs-QF-4qG"/>
+                        <constraint firstItem="bif-pg-bRC" firstAttribute="centerY" secondItem="WCy-mU-GIG" secondAttribute="centerY" id="Gjo-tL-2yB"/>
+                        <constraint firstItem="ZcT-vx-HF4" firstAttribute="bottom" secondItem="bif-pg-bRC" secondAttribute="bottom" id="PbU-EB-ASQ"/>
+                        <constraint firstItem="XCc-CB-ghR" firstAttribute="centerY" secondItem="bif-pg-bRC" secondAttribute="centerY" constant="-5" id="YQd-IA-tlr"/>
+                        <constraint firstItem="ZcT-vx-HF4" firstAttribute="trailing" secondItem="bif-pg-bRC" secondAttribute="trailing" id="a8A-5i-HjO"/>
+                        <constraint firstItem="0CN-Zg-H0g" firstAttribute="leading" secondItem="bif-pg-bRC" secondAttribute="trailing" constant="8" id="brY-3V-GKR"/>
+                        <constraint firstItem="0CN-Zg-H0g" firstAttribute="centerY" secondItem="bif-pg-bRC" secondAttribute="centerY" constant="7" id="uds-VI-1UX"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="WCy-mU-GIG" firstAttribute="top" secondItem="ZY3-sK-Nva" secondAttribute="top" id="773-8d-cWS"/>
+                <constraint firstItem="WCy-mU-GIG" firstAttribute="leading" secondItem="ZY3-sK-Nva" secondAttribute="leading" id="IJ4-IU-6Rx"/>
+                <constraint firstAttribute="bottom" secondItem="WCy-mU-GIG" secondAttribute="bottom" id="Skv-az-Oxq"/>
+                <constraint firstAttribute="trailing" secondItem="WCy-mU-GIG" secondAttribute="trailing" id="fmP-ET-VAr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="lC4-Vc-4TV"/>
+            <connections>
+                <outlet property="activeView" destination="ZcT-vx-HF4" id="MPY-bI-ob8"/>
+                <outlet property="profileImageContainerView" destination="bif-pg-bRC" id="7c8-LO-58t"/>
+                <outlet property="profileImageView" destination="FnN-I2-y3m" id="R1z-Fa-26R"/>
+                <outlet property="statusLabel" destination="0CN-Zg-H0g" id="SRW-Fk-XrP"/>
+                <outlet property="userNameLabel" destination="XCc-CB-ghR" id="XD5-zL-Ti7"/>
+            </connections>
+            <point key="canvasLocation" x="-329.71014492753625" y="-271.875"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="default_avatar" width="66" height="62"/>
+    </resources>
+</document>

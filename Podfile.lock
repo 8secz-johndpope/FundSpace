@@ -169,9 +169,12 @@ PODS:
   - GTMSessionFetcher/Core (1.2.2)
   - GTMSessionFetcher/Full (1.2.2):
     - GTMSessionFetcher/Core (= 1.2.2)
+  - InputBarAccessoryView (4.2.2)
   - IQKeyboardManagerSwift (6.4.1)
   - leveldb-library (1.22)
   - M13ProgressSuite (1.2.9)
+  - MessageKit (3.0.0):
+    - InputBarAccessoryView (~> 4.2.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -200,6 +203,7 @@ DEPENDENCIES:
   - GoogleSignIn
   - IQKeyboardManagerSwift
   - M13ProgressSuite
+  - MessageKit
   - SCLAlertView
   - SkyFloatingLabelTextField (~> 3.0)
   - SVProgressHUD
@@ -241,9 +245,11 @@ SPEC REPOS:
     - gRPC-Core
     - GTMAppAuth
     - GTMSessionFetcher
+    - InputBarAccessoryView
     - IQKeyboardManagerSwift
     - leveldb-library
     - M13ProgressSuite
+    - MessageKit
     - nanopb
     - Protobuf
     - SCLAlertView
@@ -286,15 +292,17 @@ SPEC CHECKSUMS:
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  InputBarAccessoryView: 2b937602598e2fab3149f37f51dd7ad795653812
   IQKeyboardManagerSwift: d2df660d0b8d64a15cb2537c9ff303213fa515b2
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   M13ProgressSuite: ea9f7263e73e9215e6849dfa54e29ee0ad6a145c
+  MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 08147892cc6f0932771c877d50e1e4b4e9086456
+PODFILE CHECKSUM: 0e9a436f6a4eba404538002e9483e7fff1701842
 
 COCOAPODS: 1.7.5

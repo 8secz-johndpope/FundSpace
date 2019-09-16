@@ -1,17 +1,17 @@
 //
-//  DeveloperInBoxVC.swift
+//  LeaderInBoxVC.swift
 //  FundSpace
 //
-//  Created by admin on 8/20/19.
+//  Created by admin on 9/16/19.
 //  Copyright © 2019 Zhang Hui. All rights reserved.
 //
 
 import UIKit
-import SVProgressHUD
 import Firebase
 import MGSwipeTableCell
+import SVProgressHUD
 
-class DeveloperInBoxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LeaderInBoxVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var channelTableView: UITableView!
     
@@ -19,12 +19,12 @@ class DeveloperInBoxVC: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         loadData()
     }
     
-
+    
     func loadData() {
         SVProgressHUD.show()
         FirebaseService.sharedInstance.getChannels() { (channels, error) in

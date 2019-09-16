@@ -297,12 +297,35 @@ class LeaderDeveloperProfileVC: UIViewController {
         }
     }
     
+    func findChannel(completion: @escaping (Channel) -> Void) {
+        FirebaseService.sharedInstance.findChannel(id: userID) { (queryDocument, error) in
+            if error != nil {
+                let name: String = self.userInfo["name"] as? String ?? ""
+                let image: String = self.userInfo["profile_pic"] != nil ? self.userInfo["profile_pic"] as! String : ""
+                FirebaseService.sharedInstance.addChannel(name: name, receiver: self.userID, message: "", image: image, completition: { (channel, error) in
+                    completion(channel!)
+                })
+            } else if queryDocument == nil {
+                let name: String = self.userInfo["name"] as? String ?? ""
+                let image: String = self.userInfo["profile_pic"] != nil ? self.userInfo["profile_pic"] as! String : ""
+                FirebaseService.sharedInstance.addChannel(name: name, receiver: self.userID, message: "", image: image, completition: { (channel, error) in
+                    completion(channel!)
+                })
+            } else {
+                completion(Channel(document: queryDocument!)!)
+            }
+        }
+    }
+    
     @IBAction func messageBtn_Click(_ sender: Any) {
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "chatVC") as! ChatVC
-        newViewController.userName = userInfo["name"] != nil ? userInfo["name"] as! String : "No Name"
-        newViewController.userProfileImage = profileImageView.image!
-        self.navigationController?.pushViewController(newViewController, animated: true)
+        findChannel { (channel) in
+            let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let newViewController = storyBoard.instantiateViewController(withIdentifier: "chatVC") as! ChatVC
+            newViewController.userName = self.userInfo["name"] != nil ? self.userInfo["name"] as! String : "No Name"
+            newViewController.userProfileImage = self.profileImageView.image!
+            newViewController.channel = channel
+            self.navigationController?.pushViewController(newViewController, animated: true)
+        }
     }
     
     @IBAction func currentProjectBtn_Click(_ sender: Any) {

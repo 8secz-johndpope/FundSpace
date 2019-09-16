@@ -175,6 +175,7 @@ PODS:
   - M13ProgressSuite (1.2.9)
   - MessageKit (3.0.0):
     - InputBarAccessoryView (~> 4.2.2)
+  - MGSwipeTableCell (1.6.8)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -204,6 +205,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - M13ProgressSuite
   - MessageKit
+  - MGSwipeTableCell
   - SCLAlertView
   - SkyFloatingLabelTextField (~> 3.0)
   - SVProgressHUD
@@ -250,6 +252,7 @@ SPEC REPOS:
     - leveldb-library
     - M13ProgressSuite
     - MessageKit
+    - MGSwipeTableCell
     - nanopb
     - Protobuf
     - SCLAlertView
@@ -297,12 +300,13 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   M13ProgressSuite: ea9f7263e73e9215e6849dfa54e29ee0ad6a145c
   MessageKit: e892a9ca49ebe6d82684d3a93ad84021fa23e2c6
+  MGSwipeTableCell: dc4eca3212ed38a563b27d6aa7b3c01ce656c1e2
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 0e9a436f6a4eba404538002e9483e7fff1701842
+PODFILE CHECKSUM: 2bf46888f826a233fca44273e99974e53cacdc8b
 
 COCOAPODS: 1.7.5

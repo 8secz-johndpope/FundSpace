@@ -9,13 +9,30 @@
 import UIKit
 import MessageKit
 import InputBarAccessoryView
+import Firebase
+import FirebaseFirestore
 
-class ChatVC: MessagesViewController {
+class ChatVC: MessagesViewController, MessagesDataSource {
     
     var inputBar: InputBarAccessoryView = InputBarAccessoryView()
+    let refreshControl = UIRefreshControl()
+    let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter
+    }()
     
     var userName: String = ""
     var userProfileImage: UIImage = UIImage(named: "default_avatar")!
+    var messageList: [Message] = []
+    var channel: Channel!
+    
+    var currentUserID: String = Auth.auth().currentUser!.uid
+    
+    private let db = Firestore.firestore()
+    private var reference: CollectionReference?
+    private let storage = Storage.storage().reference()
+    private var messageListener: ListenerRegistration?
     
     /// The object that manages attachments
     open lazy var attachmentManager: AttachmentManager = { [unowned self] in
@@ -28,8 +45,36 @@ class ChatVC: MessagesViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        configureMessageCollectionView()
         configureMessageInputBar()
         configureNavigationTitleBar()
+        loadMessages()
+        
+        if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+            layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
+            layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+            layout.setMessageIncomingAvatarSize(.zero)
+        }
+    }
+    
+    @objc func loadMoreMessages() {
+        self.refreshControl.endRefreshing()
+    }
+    
+    func configureMessageCollectionView() {
+        
+        messagesCollectionView.messagesDataSource = self
+        messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDisplayDelegate = self
+        
+        scrollsToBottomOnKeyboardBeginsEditing = true // default false
+        maintainPositionOnKeyboardFrameChanged = true // default false
+        
+        messagesCollectionView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(loadMoreMessages), for: .valueChanged)
     }
     
     func configureMessageInputBar() {
@@ -43,15 +88,161 @@ class ChatVC: MessagesViewController {
         let titleView: ChatViewNavigationCell = Bundle.main.loadNibNamed("ChatViewNavigationCell", owner: self, options: nil)?.first as! ChatViewNavigationCell
         titleView.profileImageView.image = userProfileImage
         titleView.userNameLabel.text = userName
-//        navigationItem.titleView = titleView
-        
-//        let screenWidth = UIScreen.main.bounds.size.width
-//        let viewWidth = 200.0
-//        let rect = CGRect(x: 0, y: 0, width: 125, height: 45)
+        titleView.activeView.backgroundColor = UIColor(red: 0, green: 0.49, blue: 1, alpha: 1)
+
         let uiView = UIView()
         uiView.addSubview(titleView)
         
         navigationItem.titleView = uiView
+    }
+
+    func loadMessages() {
+        guard let id = channel.id else {
+            navigationController?.popViewController(animated: true)
+            return
+        }
+        
+        reference = db.collection(["channels", id, "thread"].joined(separator: "/"))
+        
+        messageListener = reference?.addSnapshotListener { querySnapshot, error in
+            guard let snapshot = querySnapshot else {
+                print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
+                return
+            }
+            
+            snapshot.documentChanges.forEach { change in
+                self.handleDocumentChange(change)
+            }
+        }
+    }
+    
+    private func handleDocumentChange(_ change: DocumentChange) {
+        guard var message = Message(document: change.document) else {
+            return
+        }
+        
+        switch change.type {
+        case .added:
+            if let url = message.downloadURL {
+                downloadImage(at: url) { [weak self] image in
+                    guard let `self` = self else {
+                        return
+                    }
+                    guard let image = image else {
+                        return
+                    }
+                    
+                    message.image = image
+                    self.insertNewMessage(message)
+                }
+            } else {
+                insertNewMessage(message)
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    private func insertNewMessage(_ message: Message) {
+        guard !messageList.contains(message) else {
+            return
+        }
+        
+        messageList.append(message)
+//        messageList = messageList.sorted(by: {
+//            $0.sentDate < $1.sentDate
+//        })
+        
+        messagesCollectionView.reloadData()
+        
+        DispatchQueue.main.async {
+            self.messagesCollectionView.scrollToBottom(animated: true)
+        }
+
+    }
+    
+    private func downloadImage(at url: URL, completion: @escaping (UIImage?) -> Void) {
+        let ref = Storage.storage().reference(forURL: url.absoluteString)
+        let megaByte = Int64(1 * 1024 * 1024)
+        
+        ref.getData(maxSize: megaByte) { data, error in
+            guard let imageData = data else {
+                completion(nil)
+                return
+            }
+            
+            completion(UIImage(data: imageData))
+        }
+    }
+    
+    private func uploadImage(_ image: UIImage, to channel: Channel, completion: @escaping (URL?) -> Void) {
+        guard let channelID = channel.id else {
+            completion(nil)
+            return
+        }
+        
+        guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
+            completion(nil)
+            return
+        }
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+        let imageRef = storage.child(channelID).child(imageName)
+        imageRef.putData(data, metadata: metadata) { meta, error in
+            guard let _ = meta else {
+                completion(nil)
+                return
+            }
+            imageRef.downloadURL(completion: { (url, error) in
+                if (error != nil) {
+                    completion(nil)
+                    return
+                }
+                
+                completion(url)
+            })
+        }
+    }
+    
+    // MARK: - MessagesDataSource
+    
+    func currentSender() -> SenderType {
+        return User(senderId: currentUserID, displayName: "")
+    }
+    
+    func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
+        return messageList.count
+    }
+    
+    func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
+        return messageList[indexPath.section]
+    }
+    
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if indexPath.section % 3 == 0 {
+            return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+        }
+        return nil
+    }
+    
+    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        
+        return NSAttributedString(string: "Read", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedString.Key.foregroundColor: UIColor.darkGray])
+    }
+    
+    func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        let name = message.sender.displayName
+        return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
+    }
+    
+    func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        
+        let dateString = formatter.string(from: message.sentDate)
+        return NSAttributedString(string: dateString, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption2)])
     }
 
 }
@@ -116,7 +307,6 @@ extension ChatVC: AttachmentManagerDelegate {
 }
 
 // MARK: - MessageCellDelegate
-
 extension ChatVC: MessageCellDelegate {
     
     func didTapAvatar(in cell: MessageCollectionViewCell) {
@@ -162,11 +352,9 @@ extension ChatVC: MessageCellDelegate {
     func didTapAccessoryView(in cell: MessageCollectionViewCell) {
         print("Accessory view tapped")
     }
-    
 }
 
 // MARK: - MessageLabelDelegate
-
 extension ChatVC: MessageLabelDelegate {
     
     func didSelectAddress(_ addressComponents: [String: String]) {
@@ -204,7 +392,6 @@ extension ChatVC: MessageLabelDelegate {
 }
 
 // MARK: - MessageInputBarDelegate
-
 extension ChatVC: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
@@ -219,37 +406,101 @@ extension ChatVC: InputBarAccessoryViewDelegate {
             print("Autocompleted: `", substring, "` with context: ", context ?? [])
         }
         
-        let components = inputBar.inputTextView.components
+        let attachments = attachmentManager.attachments
+        let user = User(senderId: currentUserID, displayName: "")
+        
         messageInputBar.inputTextView.text = String()
         messageInputBar.invalidatePlugins()
         
         // Send button activity animation
         messageInputBar.sendButton.startAnimating()
         messageInputBar.inputTextView.placeholder = "Sending..."
-        DispatchQueue.global(qos: .default).async {
-            // fake send request task
-            sleep(1)
-            DispatchQueue.main.async { [weak self] in
-                self?.messageInputBar.sendButton.stopAnimating()
-                self?.messageInputBar.inputTextView.placeholder = "Aa"
-                self?.insertMessages(components)
-                self?.messagesCollectionView.scrollToBottom(animated: true)
+        
+        if text != "" {
+            let messageData = [
+                "created": Date(),
+                "senderID": user.senderId,
+                "content": text,
+                "url": nil
+            ] as [String : Any?]
+            
+            db.collection(["channels", channel.id!, "thread"].joined(separator: "/")).addDocument(data: messageData as [String : Any]) { error in
+                if let e = error {
+                    print("Error sending message: \(e.localizedDescription)")
+                    return
+                }
+                self.messageInputBar.sendButton.stopAnimating()
+                self.messageInputBar.inputTextView.placeholder = "Aa"
+                self.messagesCollectionView.scrollToBottom(animated: true)
             }
         }
+        
+        for attachment in attachments {
+            switch attachment {
+            case .image(let image):
+                var ref: DocumentReference? = nil
+                uploadImage(image, to: channel) { [weak self] url in
+                    let messageData = [
+                        "created": Date(),
+                        "senderID": user.senderId,
+                        "content": "",
+                        "url": url?.absoluteString
+                    ] as [String : Any?]
+                    
+                    self!.db.collection(["channels", self!.channel.id!, "thread"].joined(separator: "/")).addDocument(data: messageData as [String : Any]) { error in
+                        if let e = error {
+                            print("Error sending message: \(e.localizedDescription)")
+                            return
+                        }
+                        self!.messageInputBar.sendButton.stopAnimating()
+                        self!.messageInputBar.inputTextView.placeholder = "Aa"
+                        self!.messagesCollectionView.scrollToBottom(animated: true)
+                    }
+                }
+            default:
+                break
+            }
+            
+        }
+    }
+}
+
+// MARK: - MessagesDisplayDelegate
+extension ChatVC: MessagesDisplayDelegate {
+    
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        let opponentColor = UIColor(red: 0.8, green: 0.9, blue: 1, alpha: 1)
+        let defaultColor = UIColor.lightGray
+        return isFromCurrentSender(message: message) ? defaultColor : opponentColor
     }
     
-    private func insertMessages(_ data: [Any]) {
-//        for component in data {
-//            let user = SampleData.shared.currentSender
-//            if let str = component as? String {
-//                let message = MockMessage(text: str, user: user, messageId: UUID().uuidString, date: Date())
-//                insertMessage(message)
-//            } else if let img = component as? UIImage {
-//                let message = MockMessage(image: img, user: user, messageId: UUID().uuidString, date: Date())
-//                insertMessage(message)
-//            }
-//        }
+    func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> Bool {
+        return false
     }
+    
+    func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
+        return .bubbleTail(corner, .curved)
+    }
+    
+}
+
+// MARK: - MessagesLayoutDelegate
+extension ChatVC: MessagesLayoutDelegate {
+    
+    func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return .zero
+    }
+    
+    func footerViewSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        return CGSize(width: 0, height: 8)
+    }
+    
+    func heightForLocation(message: MessageType, at indexPath: IndexPath, with maxWidth: CGFloat, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+        
+        return 0
+    }
+    
 }
 
 // Helper function inserted by Swift 4.2 migrator.

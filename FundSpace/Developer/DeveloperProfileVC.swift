@@ -106,6 +106,9 @@ class DeveloperProfileVC: UIViewController {
     func initGesture() {
         let creditPositionGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTapOnCreditPosition))
         creditPositionView.addGestureRecognizer(creditPositionGesture)
+        
+        let chartGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleTapOnChart))
+        assetsView.addGestureRecognizer(chartGesture)
     }
     
     func initUI() {
@@ -176,6 +179,12 @@ class DeveloperProfileVC: UIViewController {
     @objc func handleTapOnCreditPosition() {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "creditPositionVC") as! CreditPositionVC
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
+    @objc func handleTapOnChart() {
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "assetsVC") as! AssetsVC
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
     

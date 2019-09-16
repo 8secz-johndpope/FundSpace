@@ -14,13 +14,12 @@ class FirebaseService {
     let db = Firestore.firestore()
     let storage = Storage.storage()
     var ref: DocumentReference? = nil
-    var currentUser: User? = nil
     
     fileprivate var userProjectsCount = 0
     fileprivate var userProjectsResultCount = 0
     
     init() {
-        currentUser = Auth.auth().currentUser
+        
     }
     
     
@@ -383,6 +382,76 @@ class FirebaseService {
                 completion((result as! Array<[String : Any]>), nil)
             } else {
                 completion([], error)
+            }
+        }
+    }
+    
+    func addChannel(name: String, receiver: String, message: String, image: String, completition: @escaping (Channel?, Error?) -> Void) {
+        let userID: String = Auth.auth().currentUser!.uid
+        var channel: Channel = Channel(senderName: name, lastMessage: "", senderID: userID, receiverID: receiver, senderUserImageURL: image)
+        var ref: DocumentReference? = nil
+        ref = db.collection("channels").addDocument(data: channel.representation) { (error) in
+            channel.id = ref?.documentID
+            completition(channel, error)
+        }
+    }
+        
+    func findChannel(id: String, completion: @escaping (QueryDocumentSnapshot?, Error?) -> Void) {
+        let currentUserID: String = Auth.auth().currentUser!.uid
+        db.collection("channels").getDocuments { (snapShots, error) in
+            if let snapshot = snapShots {
+                if snapshot.documents.count == 0 {
+                    completion(nil, nil)
+                }
+                for document in snapshot.documents {
+                    var data = document.data()
+                    let senderID: String = data["sender"] as? String ?? ""
+                    let receiverID: String = data["receiver"] as? String ?? ""
+                    if ((senderID == currentUserID && receiverID == id) || (receiverID == currentUserID && senderID == id)) {
+                        completion(document, nil)
+                    }
+                }
+            } else {
+                completion(nil, error)
+            }
+        }
+    }
+    
+    func getChannels(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        let userID: String = Auth.auth().currentUser!.uid
+        
+        db.collection("channels").getDocuments { (snapShots, error) in
+            if let snapshot = snapShots {
+                if snapshot.documents.count == 0 {
+                    completion(nil, nil)
+                }
+                var result: Array<[String: Any]> = []
+                for document in snapshot.documents {
+                    var data = document.data()
+                    let senderID: String = data["sender"] as? String ?? ""
+                    let receiverID: String = data["receiver"] as? String ?? ""
+                    if (senderID == userID || receiverID == userID) {
+                        result.append(data)
+                    }
+                }
+                completion(result, nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
+    
+    func getChannelDetail(channel: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
+        let userID: String = Auth.auth().currentUser!.uid
+        let senderID: String = channel["sender"] as? String ?? ""
+        let receiverID: String = channel["receiver"] as? String ?? ""
+        if userID == senderID {
+            getUserInfo(id: receiverID) { (result, error) in
+                completion(result, error)
+            }
+        } else {
+            getUserInfo(id: senderID) { (result, error) in
+                completion(result, error)
             }
         }
     }

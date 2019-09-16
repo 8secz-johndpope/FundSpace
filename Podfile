@@ -17,6 +17,7 @@ target 'FundSpace' do
   pod 'Charts'
   pod 'ExpandableCell'
   pod 'MessageKit'
+  pod 'MGSwipeTableCell'
   
   pod 'Firebase/Core'
   pod 'Firebase/Auth'

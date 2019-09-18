@@ -182,7 +182,7 @@ struct Message: MessageType {
     init?(document: QueryDocumentSnapshot) {
         let data = document.data()
         
-        let sentDate: Date = data["created"] as? Date ?? Date()
+        let sentDate: Date = (data["created"] as? Timestamp)?.dateValue() ?? Date()
         let senderID: String = data["senderID"] as? String ?? ""
         let content: String = data["content"] as? String ?? ""
         

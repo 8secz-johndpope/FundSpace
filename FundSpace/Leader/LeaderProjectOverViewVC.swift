@@ -115,9 +115,11 @@ class LeaderProjectOverViewVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         loadProjectInfo()
         initGesture()
+        
     }
     
     func initUI() {
@@ -170,7 +172,7 @@ class LeaderProjectOverViewVC: UIViewController {
         
         sendTermsBtn.layer.cornerRadius = 4
         
-        let position = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.127)
+        let position = CLLocationCoordinate2D(latitude: 51.476693, longitude: -0.200340)
         let london = GMSMarker(position: position)
         london.title = "London"
         london.icon = UIImage(named: "pin")
@@ -219,6 +221,7 @@ class LeaderProjectOverViewVC: UIViewController {
                 self.userInfo = userInfo!
                 self.projectInfo = data
                 self.applyDataToUI()
+                self.sendNotification()
             })
         }
     }
@@ -246,7 +249,7 @@ class LeaderProjectOverViewVC: UIViewController {
         projectTitleLabel.text = projectInfo["title"] as? String ?? ""
         projectAddressLabel.text = projectInfo["street"] as? String ?? ""
         
-        let units: Int = Int(projectInfo["units"] as! String) ?? 0
+        let units: Int = Int(projectInfo["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             unitsView.isHidden = true
@@ -378,6 +381,17 @@ class LeaderProjectOverViewVC: UIViewController {
         thirdEngineerTextField.isEnabled = flag
     }
     
+    func sendNotification() {
+        let notification = [
+            "receiver": userId,
+            "type": "view"
+        ]
+        
+        FirebaseService.sharedInstance.sendNotification(notificationInfo: notification) { (error) in
+            
+        }
+    }
+    
     @IBAction func uploadDocumentBtn_Click(_ sender: Any) {
     }
     
@@ -390,6 +404,7 @@ class LeaderProjectOverViewVC: UIViewController {
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "sendTermsVC") as! SendTermsVC
         newViewController.projectInfo = projectInfo
         newViewController.userId = userId
+        newViewController.projectId = projectID
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
 }

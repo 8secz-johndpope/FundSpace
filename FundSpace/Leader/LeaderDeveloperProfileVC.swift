@@ -11,7 +11,7 @@ import M13ProgressSuite
 import Charts
 import SVProgressHUD
 
-class LeaderDeveloperProfileVC: UIViewController {
+class LeaderDeveloperProfileVC: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var basicInfoView: UIView!
     @IBOutlet weak var profileImageBtn: UIButton!
@@ -87,9 +87,13 @@ class LeaderDeveloperProfileVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         makeEditable(false)
         fetchInitData()
+        initProgressBar()
+        initChartView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -147,12 +151,43 @@ class LeaderDeveloperProfileVC: UIViewController {
         projectProfitView.addBottomBorder(color: bordorColor, margins: 0, borderLineSize: 0.5)
         
         creditPositionView.makeRoundShadowView()
-        creditPositionProgressBar.setProgress(0.75, animated: true)
         creditPositionProgressBar.showPercentage = false
         
         assetsView.makeRoundShadowView()
         
         uploadDocumentBtn.layer.cornerRadius = 4
+        
+        assetsChatView.delegate = self
+        
+        let labels = [
+            "Current & Savings Account",
+            "Properties",
+            "Stocks, Shares & Bonds",
+            "Other Assets"
+        ]
+        
+        let l = assetsChatView.legend
+        l.horizontalAlignment = .right
+        l.verticalAlignment = .top
+        l.orientation = .horizontal
+        l.drawInside = false
+        l.font = UIFont(name: "OpenSans", size: 8.8)!
+        l.yOffset = 10
+        l.xOffset = 10
+        l.yEntrySpace = 0
+        //        chartView.legend = l
+        
+        let xAxis = assetsChatView.xAxis
+        xAxis.labelFont = UIFont(name: "OpenSans", size: 9)!
+        xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
+        xAxis.labelPosition = .bottom
+        xAxis.wordWrapEnabled = true
+        xAxis.granularity = 1
+        xAxis.centerAxisLabelsEnabled = true
+        
+        assetsChatView.rightAxis.enabled = false
+        assetsChatView.leftAxis.enabled = false
+        assetsChatView.extraBottomOffset = 30
     }
     
     func makeEditable(_ flag: Bool) {
@@ -233,6 +268,54 @@ class LeaderDeveloperProfileVC: UIViewController {
                 self.initDropDown()
             }
         })
+    }
+    
+    func initProgressBar() {
+        let creditPositions: [[String:Int]] = userInfo["creditPositions"] as? [[String:Int]] ?? []
+        if creditPositions.count == 0 {
+            return
+        }
+        let position = creditPositions[0]["mainNo"]! + creditPositions[1]["mainNo"]! + creditPositions[2]["mainNo"]! + creditPositions[3]["mainNo"]!
+        creditPositionProgressBar.setProgress(CGFloat(position) / 4.0, animated: true)
+    }
+    
+    func initChartView() {
+        let assets: Array<String> = userInfo["assets"] as? Array<String> ?? []
+        
+        let groupSpace = 0.4
+        let barSpace = 0.0
+        let barWidth = 0.3
+        
+        
+        let block: (Int) -> BarChartDataEntry = { (i) -> BarChartDataEntry in
+            return BarChartDataEntry(x: Double(i), y: Double(assets[i]) as! Double)
+        }
+        let yVals1 = stride(from: 0, to: assets.count, by: 2).map(block)
+        let yVals2 = stride(from: 1, to: assets.count, by: 2).map(block)
+        
+        let set1 = BarChartDataSet(entries: yVals1, label: "Assets")
+        set1.setColor(UIColor(red: 0, green: 0.49, blue: 1, alpha: 1))
+        set1.drawValuesEnabled = false
+        
+        let set2 = BarChartDataSet(entries: yVals2, label: "Liabilities")
+        set2.setColor(UIColor(red: 0.43, green: 0.8, blue: 0.76, alpha: 1))
+        set2.drawValuesEnabled = false
+        
+        let data = BarChartData(dataSets: [set1, set2])
+        
+        
+        // specify the width each bar should have
+        data.barWidth = barWidth
+        
+        // restrict the x-axis range
+        assetsChatView.xAxis.axisMinimum = 0
+        
+        // groupWidthWithGroupSpace(...) is a helper that calculates the width each group needs based on the provided parameters
+        assetsChatView.xAxis.axisMaximum = 4
+        
+        data.groupBars(fromX: 0, groupSpace: groupSpace, barSpace: barSpace)
+        
+        assetsChatView.data = data
     }
     
     func fetchInitData() {

@@ -20,6 +20,7 @@ class LeaderCurrentProjectsVC: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         loadData()
     }
     
@@ -99,7 +100,7 @@ class LeaderCurrentProjectsVC: UIViewController, UITableViewDataSource, UITableV
             cell.projectPermissionLabel.text = ""
         }
         
-        let units: Int = Int(data["units"] as! String) ?? 0
+        let units: Int = Int(data["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             cell.projectBedroomsView.isHidden = true

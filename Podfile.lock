@@ -1,4 +1,5 @@
 PODS:
+  - AEAccordion (2.1.1)
   - AppAuth (1.2.0):
     - AppAuth/Core (= 1.2.0)
     - AppAuth/ExternalUserAgent (= 1.2.0)
@@ -187,6 +188,7 @@ PODS:
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
+  - AEAccordion
   - Atributika
   - BEMCheckBox
   - Charts
@@ -212,6 +214,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AEAccordion
     - AppAuth
     - Atributika
     - BEMCheckBox
@@ -260,6 +263,7 @@ SPEC REPOS:
     - SVProgressHUD
 
 SPEC CHECKSUMS:
+  AEAccordion: 8dbe0aa4af3873e684f7542376f852c3c39ba599
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   Atributika: 7b3631032cf11f2197b352343e0bd1b783d8ca88
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
@@ -307,6 +311,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 2bf46888f826a233fca44273e99974e53cacdc8b
+PODFILE CHECKSUM: 318b18e66b97edc0d5d62b6aa94584bb18c35c02
 
 COCOAPODS: 1.7.5

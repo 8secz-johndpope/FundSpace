@@ -95,11 +95,15 @@ class FirebaseService {
             }
         }
     }
-    
+
     
     // Update current user information
     func storeUserInfo(id: String, userInfo: [String: Any], completion: @escaping (Error?) -> Void) {
-        db.collection("users").document(id).setData(userInfo, merge: true, completion: { (error) in
+        var userID: String = id
+        if userID == "" {
+            userID = Auth.auth().currentUser!.uid
+        }
+        db.collection("users").document(userID).setData(userInfo, merge: true, completion: { (error) in
             if let error = error {
                 completion(error)
             } else {
@@ -115,6 +119,7 @@ class FirebaseService {
             completion(error)
         }
     }
+    
     
     // Upload profile image and update the user info.
     func uploadImage(imageData: Data?, completion: @escaping (String?, Error?) -> Void) {
@@ -154,6 +159,7 @@ class FirebaseService {
         }
     }
     
+    
     // Download user profile image
     func downloadImage(path: String, completion: @escaping (Data?, Error?) -> Void) {
         let profileRef = storage.reference(forURL: path)
@@ -162,6 +168,7 @@ class FirebaseService {
             completion(data, error)
         }
     }
+    
     
     // Fetch previous projects for developer
     func fetchPreviousProjects(_ id: String?, completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
@@ -203,6 +210,7 @@ class FirebaseService {
         })
     }
     
+    
     func updatePreviousProject(prevProject: [String: Any], completion: @escaping (Error?) -> Void) {
         let id: String = prevProject["id"] as? String ?? ""
         if id == "" {
@@ -241,6 +249,7 @@ class FirebaseService {
         }
     }
     
+    
     func addProject(projectInfo: [String: Any], completion: @escaping (String?, Error?) -> Void) {
         var ref: DocumentReference? = nil
         let user_id: String = Auth.auth().currentUser!.uid
@@ -271,6 +280,7 @@ class FirebaseService {
         }
     }
     
+    
     func getProjectByID(id: String, completion: @escaping([String: Any], Error?) -> Void) {
         db.collection("projects").document(id).getDocument { (document, error) in
             if let document = document, document.exists {
@@ -282,11 +292,13 @@ class FirebaseService {
         }
     }
     
+    
     func updateProject(id: String, projectInfo: [String: Any], completion: @escaping (Error?) -> Void) {
         db.collection("projects").document(id).setData(projectInfo, merge: true, completion: { (error) in
             completion(error)
         })
     }
+    
     
     func deleteProject(id: String, completion: @escaping (Error?) -> Void) {
         let user_id = Auth.auth().currentUser?.uid
@@ -317,6 +329,7 @@ class FirebaseService {
         }
     }
     
+    
     func getProjectsByUserID(_ user_id: String, completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
         var userID: String = user_id
         if (userID == "") {
@@ -338,6 +351,7 @@ class FirebaseService {
         }
     }
     
+    
     func getAllProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
         db.collection("projects").getDocuments { (snapshot, error) in
             if let error = error {
@@ -354,9 +368,10 @@ class FirebaseService {
         }
     }
     
+    
     func getUserInfo(id: String?, completion: @escaping ([String: Any]?, Error?) -> Void) {
         var user_id = id
-        if user_id == nil {
+        if user_id == nil || user_id == "" {
             user_id = Auth.auth().currentUser?.uid
         }
         
@@ -368,6 +383,7 @@ class FirebaseService {
             }
         }
     }
+    
     
     func getBookmarkProjects(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
         let user_id: String = Auth.auth().currentUser!.uid
@@ -386,6 +402,7 @@ class FirebaseService {
         }
     }
     
+    
     func addChannel(name: String, receiver: String, message: String, image: String, completition: @escaping (Channel?, Error?) -> Void) {
         let userID: String = Auth.auth().currentUser!.uid
         var channel: Channel = Channel(senderName: name, lastMessage: "", senderID: userID, receiverID: receiver, senderUserImageURL: image)
@@ -395,7 +412,8 @@ class FirebaseService {
             completition(channel, error)
         }
     }
-        
+    
+    
     func findChannel(id: String, completion: @escaping (QueryDocumentSnapshot?, Error?) -> Void) {
         let currentUserID: String = Auth.auth().currentUser!.uid
         db.collection("channels").getDocuments { (snapShots, error) in
@@ -417,13 +435,14 @@ class FirebaseService {
         }
     }
     
+    
     func getChannels(completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
         let userID: String = Auth.auth().currentUser!.uid
         
         db.collection("channels").getDocuments { (snapShots, error) in
             if let snapshot = snapShots {
                 if snapshot.documents.count == 0 {
-                    completion(nil, nil)
+                    completion([], nil)
                 }
                 var result: Array<[String: Any]> = []
                 for document in snapshot.documents {
@@ -441,6 +460,7 @@ class FirebaseService {
         }
     }
     
+    
     func getChannelDetail(channel: [String: Any], completion: @escaping ([String: Any]?, Error?) -> Void) {
         let userID: String = Auth.auth().currentUser!.uid
         let senderID: String = channel["sender"] as? String ?? ""
@@ -453,6 +473,54 @@ class FirebaseService {
             getUserInfo(id: senderID) { (result, error) in
                 completion(result, error)
             }
+        }
+    }
+    
+    
+    func getNotificationsByID(_ user_id: String, completion: @escaping (Array<[String: Any]>?, Error?) -> Void) {
+        var userID: String = user_id
+        if (userID == "") {
+            userID = Auth.auth().currentUser!.uid
+        }
+        
+        db.collection("notifications").whereField("receiver", isEqualTo: userID).getDocuments { (snapshot, error) in
+            if let snapshot = snapshot {
+                var result: Array<Any> = []
+                for document in snapshot.documents {
+                    var data = document.data()
+                    data["id"] = document.documentID
+                    result.append(data)
+                }
+                completion((result as! Array<[String : Any]>), nil)
+            } else {
+                completion([], error)
+            }
+        }
+    }
+    
+    
+    func sendNotification(notificationInfo: [String: Any], completion: @escaping (Error?) -> Void) {
+        var info = notificationInfo
+        getUserInfo(id: "") { (userInfo, error) in
+            if let error = error {
+                completion(error)
+            }
+            
+            info["name"] = userInfo!["name"]
+            info["image"] = userInfo!["profile_pic"]
+            info["sender"] = Auth.auth().currentUser?.uid
+            self.db.collection("notifications").addDocument(data: info, completion: { (error) in
+                completion(error)
+            })
+        }
+    }
+    
+    func sendTerms(termsInfo: [String: Any], completion: @escaping (Error?) -> Void) {
+        let currentUserID: String = Auth.auth().currentUser!.uid
+        var info = termsInfo
+        info["leader"] = currentUserID
+        db.collection("terms").addDocument(data: info) { (error) in
+            completion(error)
         }
     }
 }

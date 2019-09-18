@@ -114,6 +114,7 @@ class AddProjectVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         
         self.add(asChildViewController: addProjectStep1VC)
@@ -170,6 +171,16 @@ class AddProjectVC: UIViewController {
         let strategy: String = addProjectStep7VC.sellCheckBox.isChecked ? "Sell" : "Refinance"
         let contribute: String = addProjectStep7VC.captialCostTextField.text ?? ""
         
+        if contribute == "" {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "Please fill all fields to share project.")
+            return
+        }
+        
+        if !contribute.isNumber {
+            Utils.sharedInstance.showNotice(title: "Notice", message: "You need to fill numeric value for contribute field.")
+            return
+        }
+        
         var projectInfo: [String: Any] = [:]
         projectInfo["title"] = title
         projectInfo["type"] = type
@@ -222,19 +233,53 @@ class AddProjectVC: UIViewController {
     @IBAction func nextBtn_Click(_ sender: Any) {
         switch step {
         case 1:
+            if addProjectStep1VC.projectTitleTextField.text == "" {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "Please fill project title to go ahead.")
+                return
+            }
+            
             remove(asChildViewController: addProjectStep1VC)
             add(asChildViewController: addProjectStep2VC)
             prevBtn.isHidden = false
         case 2:
+            if addProjectStep2VC.fundingTypeTextField.text == "" || addProjectStep2VC.fullPermissionTextField.text == "" {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "Please fill all fields to go ahead.")
+                return
+            }
+            
             remove(asChildViewController: addProjectStep2VC)
             add(asChildViewController: addProjectStep3VC)
         case 3:
+            if addProjectStep3VC.streetTextField.text == "" {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "You need to fill street field at least to go ahead.")
+                return
+            }
+            
             remove(asChildViewController: addProjectStep3VC)
             add(asChildViewController: addProjectStep4VC)
         case 4:
+            if addProjectStep4VC.purchaseTextField.text == "" || addProjectStep4VC.buildTextField.text == "" {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "Please fill all fields to go ahead.")
+                return
+            }
+            
+            if !addProjectStep4VC.purchaseTextField.text!.isNumber || !addProjectStep4VC.buildTextField.text!.isNumber {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "You should provide the numeric value for any field.")
+                return
+            }
+            
             remove(asChildViewController: addProjectStep4VC)
             add(asChildViewController: addProjectStep5VC)
         case 5:
+            if addProjectStep5VC.currentTextField.text == "" || addProjectStep5VC.gdvTextField.text == "" {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "Please fill all fields to go ahead.")
+            }
+            
+            if !addProjectStep5VC.currentTextField.text!.isNumber || !addProjectStep5VC.gdvTextField.text!.isNumber {
+                Utils.sharedInstance.showNotice(title: "Notice", message: "You should provide the numeric value for any field.")
+                return
+            }
+            
             remove(asChildViewController: addProjectStep5VC)
             add(asChildViewController: addProjectStep6VC)
         case 6:

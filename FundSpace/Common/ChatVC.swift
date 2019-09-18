@@ -116,6 +116,21 @@ class ChatVC: MessagesViewController, MessagesDataSource {
         }
     }
     
+    func sendNotification() {
+        let receiverID: String = channel.receiverID
+        let senderID: String = channel.senderID
+        let id: String = currentUserID == receiverID ? senderID : receiverID
+        
+        let notification = [
+            "receiver": id,
+            "type": "message"
+        ]
+        
+        FirebaseService.sharedInstance.sendNotification(notificationInfo: notification) { (error) in
+            
+        }
+    }
+    
     private func handleDocumentChange(_ change: DocumentChange) {
         guard var message = Message(document: change.document) else {
             return
@@ -150,9 +165,8 @@ class ChatVC: MessagesViewController, MessagesDataSource {
         }
         
         messageList.append(message)
-//        messageList = messageList.sorted(by: {
-//            $0.sentDate < $1.sentDate
-//        })
+        
+        messageList.sort()
         
         messagesCollectionView.reloadData()
         
@@ -429,9 +443,14 @@ extension ChatVC: InputBarAccessoryViewDelegate {
                     print("Error sending message: \(e.localizedDescription)")
                     return
                 }
-                self.messageInputBar.sendButton.stopAnimating()
-                self.messageInputBar.inputTextView.placeholder = "Aa"
-                self.messagesCollectionView.scrollToBottom(animated: true)
+                
+                if (attachments.count == 0) {
+                    self.messageInputBar.sendButton.stopAnimating()
+                    self.messageInputBar.inputTextView.placeholder = "Aa"
+                    self.messagesCollectionView.scrollToBottom(animated: true)
+                    
+                    self.sendNotification()
+                }
             }
         }
         
@@ -462,6 +481,10 @@ extension ChatVC: InputBarAccessoryViewDelegate {
             }
             
         }
+        
+        if attachments.count > 0 {
+            sendNotification()
+        }
     }
 }
 
@@ -470,7 +493,7 @@ extension ChatVC: MessagesDisplayDelegate {
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
         let opponentColor = UIColor(red: 0.8, green: 0.9, blue: 1, alpha: 1)
-        let defaultColor = UIColor.lightGray
+        let defaultColor = UIColor.lightGray.withAlphaComponent(0.6)
         return isFromCurrentSender(message: message) ? defaultColor : opponentColor
     }
     

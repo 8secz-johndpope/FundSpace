@@ -105,6 +105,7 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         loadProjectInfo()
     }
@@ -151,7 +152,7 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
         deleteProjectBtn.layer.cornerRadius = 4
         deleteProjectBtn.layer.borderWidth = 1
         
-        let position = CLLocationCoordinate2D(latitude: 51.5, longitude: -0.127)
+        let position = CLLocationCoordinate2D(latitude: 51.476693, longitude: -0.200340)
         let london = GMSMarker(position: position)
         london.title = "London"
         london.icon = UIImage(named: "pin")
@@ -197,7 +198,7 @@ class DeveloperProjectOverViewVC: UIViewController, UITextFieldDelegate {
         projectTitleLabel.text = projectInfo["title"] as? String ?? ""
         projectAddressLabel.text = projectInfo["street"] as? String ?? ""
         
-        let units: Int = Int(projectInfo["units"] as! String) ?? 0
+        let units: Int = Int(projectInfo["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             unitsView.isHidden = true

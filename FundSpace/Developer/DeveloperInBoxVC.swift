@@ -21,6 +21,7 @@ class DeveloperInBoxVC: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         loadData()
     }
     

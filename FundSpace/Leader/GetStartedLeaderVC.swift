@@ -28,6 +28,7 @@ class GetStartedLeaderVC: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         getUserInfo()
     }

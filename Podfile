@@ -16,6 +16,7 @@ target 'FundSpace' do
   pod 'M13ProgressSuite'
   pod 'Charts'
   pod 'ExpandableCell'
+  pod 'AEAccordion'
   pod 'MessageKit'
   pod 'MGSwipeTableCell'
   

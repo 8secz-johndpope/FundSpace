@@ -35,7 +35,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        SVProgressHUD.setDefaultMaskType(.clear)
         initUI()
         loadData()
     }
@@ -80,6 +80,17 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return user_list!.contains(currentUserID)
     }
     
+    func sendNotification(_ userID: String) {
+        let notification = [
+            "receiver": userID,
+            "type": "save"
+        ]
+        
+        FirebaseService.sharedInstance.sendNotification(notificationInfo: notification) { (error) in
+            
+        }
+    }
+    
     @objc func bookmarkBtnClick(sender: UIButton) {
         let tag = sender.tag
         let data = projects[tag]
@@ -106,6 +117,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             
             self.projects[tag]["bookmark"] = bookmarks
+            self.sendNotification(data["userID"] as! String)
         }
     }
     
@@ -143,7 +155,7 @@ class LeaderSearchVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.projectPermissionLabel.text = ""
         }
         
-        let units: Int = Int(data["units"] as! String) ?? 0
+        let units: Int = Int(data["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             cell.projectBedroomsView.isHidden = true

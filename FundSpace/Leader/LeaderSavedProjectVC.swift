@@ -23,6 +23,7 @@ class LeaderSavedProjectVC: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        SVProgressHUD.setDefaultMaskType(.clear)
         loadData()
     }
     
@@ -66,7 +67,7 @@ class LeaderSavedProjectVC: UIViewController, UITableViewDelegate, UITableViewDa
             cell.projectPermissionLabel.text = ""
         }
         
-        let units: Int = Int(data["units"] as! String) ?? 0
+        let units: Int = Int(data["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             cell.projectBedroomsView.isHidden = true

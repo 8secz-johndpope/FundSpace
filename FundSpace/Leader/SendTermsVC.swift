@@ -8,6 +8,7 @@
 
 import UIKit
 import Atributika
+import SVProgressHUD
 
 class SendTermsVC: UIViewController {
     @IBOutlet weak var projectTitleLabel: UILabel!
@@ -35,11 +36,13 @@ class SendTermsVC: UIViewController {
     
     var projectInfo: [String: Any] = [:]
     var userId: String = ""
+    var projectId: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        SVProgressHUD.setDefaultMaskType(.none)
         initUI()
         loadData()
     }
@@ -98,7 +101,7 @@ class SendTermsVC: UIViewController {
         
         projectReferenceLabel.text = projectInfo["reference"] as? String ?? ""
         
-        let units: Int = Int(projectInfo["units"] as! String) ?? 0
+        let units: Int = Int(projectInfo["units"] as? String ?? "") ?? 0
         
         if units == 0 {
             projectUnitsView.isHidden = true
@@ -108,7 +111,54 @@ class SendTermsVC: UIViewController {
         }
     }
     
-    @objc func sendTermsAction() {
+    func sendNotification() {
+        let notification = [
+            "receiver": userId,
+            "type": "terms"
+        ]
         
+        FirebaseService.sharedInstance.sendNotification(notificationInfo: notification) { (error) in
+            
+        }
+    }
+    
+    @objc func sendTermsAction() {
+        let product: String = productTextField.text ?? ""
+        let term: String = termsTextField.text ?? ""
+        let developmentFacility: String = developmentFacilityTextField.text ?? ""
+        let totalFacility: String = totalFacilityTextField.text ?? ""
+        let ltv: String = ltvTextField.text ?? ""
+        let monthlyRate: String = monthlyRateTextField.text ?? ""
+        let arrangementFee: String = arrangementFeeTextField.text ?? ""
+        let exitFee: String = exitFeeTextField.text ?? ""
+        let netAdvance: String = netAdvanceTextField.text ?? ""
+        let dayAdvance: String = dayAdvanceTextField.text ?? ""
+        
+        let termsInfo = [
+            "product": product,
+            "term": term,
+            "developmentFacility": developmentFacility,
+            "totalFacility": totalFacility,
+            "ltv": ltv,
+            "monthlyRate": monthlyRate,
+            "arrangementFee": arrangementFee,
+            "exitFee": exitFee,
+            "netAdvance": netAdvance,
+            "dayAdvance": dayAdvance,
+            "project": projectId,
+            "developer": userId
+        ]
+        SVProgressHUD.show()
+        FirebaseService.sharedInstance.sendTerms(termsInfo: termsInfo) { (error) in
+            SVProgressHUD.dismiss()
+            if let error = error {
+                let errorMessage = error.localizedDescription
+                Utils.sharedInstance.showError(title: "Error", message: errorMessage)
+                return
+            }
+            
+            self.sendNotification()
+            Utils.sharedInstance.showSuccess(title: "Success", message: "Terms has been posted successfully.")
+        }
     }
 }
